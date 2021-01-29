@@ -1,5 +1,4 @@
 export type TUser = {
-    id: number
     name: string
     image: string
     registration: string

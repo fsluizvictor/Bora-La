@@ -1,4 +1,5 @@
-import express from 'express'
+import express,{request,response} from 'express'
+
 
 const routes = express.Router()
 
