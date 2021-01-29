@@ -23,7 +23,7 @@ class UserController {
         try {
 
             const { id } = request.params
-            const user = await knex('Pessoa')
+            const user = await knex('Users')
                 .where('id', id)
                 .first()
 
