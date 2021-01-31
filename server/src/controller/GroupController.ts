@@ -6,7 +6,8 @@ class GroupController {
     async index(request: Request, response: Response) {
         try {
 
-            const results = await knex('Groups')
+            const results = await knex('groups')
+                .select('*')
 
             return response.json(results)
 
@@ -21,7 +22,7 @@ class GroupController {
         try {
 
             const { id } = request.params
-            const group = await knex('Group')
+            const group = await knex('groups')
                 .where('id', id)
                 .first()
 
@@ -48,31 +49,31 @@ class GroupController {
                 date,
                 description,
                 occupation_area,
-                rules
-            } = request.body
-
-            const image = request.body.filename
-
-            const group = {
-                name,
-                date,
-                description,
-                occupation_area,
                 rules,
                 image
-            }
+            } = request.body
 
-            const trx = await knex.transaction()
 
-            const id = await trx('Groups').insert(group)
-
-            await trx.commit()
+            const id = await knex('groups')
+                .insert({
+                    name,
+                    date,
+                    description,
+                    occupation_area,
+                    rules,
+                    image
+                })
 
             return response
                 .status(HTTP_SUCCESS)
                 .json({
                     id,
-                    ...group
+                    name,
+                    date,
+                    description,
+                    occupation_area,
+                    rules,
+                    image
                 })
 
         } catch (error) {
@@ -97,7 +98,7 @@ class GroupController {
                 rules
             } = request.body
 
-            await knex('Groups')
+            await knex('groups')
                 .update({
                     name,
                     date,
@@ -132,7 +133,7 @@ class GroupController {
 
             const { id } = request.params
 
-            await knex('Group')
+            await knex('groups')
                 .where({ id })
                 .del()
 
