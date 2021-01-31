@@ -8,9 +8,12 @@ class UserController {
     async index(request: Request, response: Response) {
         try {
 
-            const results = await knex('Users')
+            const results = await knex('users')
+                .select('*')
 
-            return response.json(results)
+            return response
+                .status(HTTP_SUCCESS)
+                .json(results)
 
         } catch (error) {
 
@@ -23,7 +26,7 @@ class UserController {
         try {
 
             const { id } = request.params
-            const user = await knex('Users')
+            const user = await knex('users')
                 .where('id', id)
                 .first()
 
@@ -56,46 +59,47 @@ class UserController {
                 course,
                 email,
                 description,
-                active
             } = request.body
 
             const password = bcrypt.hashSync(request.body.password, 8)
             const image = request.body.filename
 
-            const user = {
-                name,
-                image,
-                registration,
-                city,
-                uf,
-                latitude,
-                longitude,
-                birth,
-                course,
-                email,
-                description,
-                password,
-            }
-
-            const trx = await knex.transaction()
-
-            const id = await trx('Users').insert(user)
-
-            await trx.commit()
+            const id = await knex('users')
+                .insert({
+                    name,
+                    registration,
+                    city,
+                    uf,
+                    latitude,
+                    longitude,
+                    birth,
+                    course,
+                    email,
+                    password,
+                    description,
+                })
 
             return response
                 .status(HTTP_SUCCESS)
                 .json({
                     id,
-                    ...user
+                    name,
+                    registration,
+                    city,
+                    uf,
+                    latitude,
+                    longitude,
+                    birth,
+                    course,
+                    email,
+                    description,
+                    password
                 })
 
         } catch (error) {
-
             return response
                 .status(HTTP_SERVER_ERROR)
                 .json(error)
-
         }
     }
 
@@ -117,7 +121,7 @@ class UserController {
                 description
             } = request.body
 
-            await knex('Users')
+            await knex('users')
                 .update({
                     name,
                     registration,
@@ -162,7 +166,7 @@ class UserController {
 
             const { id } = request.params
 
-            await knex('Users')
+            await knex('users')
                 .where({ id })
                 .del()
 
@@ -183,19 +187,3 @@ class UserController {
 }
 
 export default UserController
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
