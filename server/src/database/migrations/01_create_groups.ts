@@ -8,6 +8,7 @@ export async function up(knex: Knex) {
         table.string('description').notNullable()
         table.string('occupation_area').notNullable()
         table.string('rules').notNullable()
+        table.string('image').notNullable()
     })
 }
 

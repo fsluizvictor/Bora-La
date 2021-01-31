@@ -1,7 +1,7 @@
 import { Request, Response, json, request } from 'express'
 import knex from '../database/connection'
 import bcrypt from 'bcryptjs'
-import { HTTP_AUTHORIZATION, HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_VALIDATION } from '../utils/consts'
+import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED } from '../utils/consts'
 
 class UserController {
 
@@ -11,9 +11,18 @@ class UserController {
             const results = await knex('users')
                 .select('*')
 
+            const serializedUsers = results.map(user => {
+                return {
+                    ...user,
+                    image_url: `http://192.168.15.15:3333/uploads/${user.image}`
+                }
+            })
+
             return response
                 .status(HTTP_SUCCESS)
-                .json(results)
+                .json({
+                    ...serializedUsers
+                })
 
         } catch (error) {
 
@@ -30,10 +39,15 @@ class UserController {
                 .where('id', id)
                 .first()
 
+            const serializedUser = {
+                ...user,
+                image_url: `http://192.168.15.15:3333/uploads/${user.image}`
+            }
+
             return response
                 .status(HTTP_SUCCESS)
                 .json({
-                    ...user
+                    ...serializedUser
                 })
 
         } catch (error) {
@@ -50,6 +64,7 @@ class UserController {
 
             const {
                 name,
+                image,
                 registration,
                 city,
                 uf,
@@ -62,12 +77,12 @@ class UserController {
             } = request.body
 
             const password = bcrypt.hashSync(request.body.password, 8)
-            const image = request.body.filename
 
             const id = await knex('users')
                 .insert({
                     name,
                     registration,
+                    image: request.file.filename,
                     city,
                     uf,
                     latitude,
@@ -80,10 +95,11 @@ class UserController {
                 })
 
             return response
-                .status(HTTP_SUCCESS)
+                .status(HTTP_CREATED)
                 .json({
                     id,
                     name,
+                    image: request.file.filename,
                     registration,
                     city,
                     uf,

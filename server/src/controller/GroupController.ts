@@ -1,20 +1,28 @@
 import { Request, Response, json, request } from 'express'
 import knex from '../database/connection'
-import { HTTP_AUTHORIZATION, HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_VALIDATION } from '../utils/consts'
+import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED, IP_UPLOAD_PATH } from '../utils/consts'
 
 class GroupController {
+
     async index(request: Request, response: Response) {
         try {
-
             const results = await knex('groups')
                 .select('*')
 
-            return response.json(results)
+            const serializedGroups = results.map(group => {
+                return {
+                    ...group,
+                    image_url: `IP_UPLOAD_PATH${group.image}`
+                }
+            })
 
+            return response
+                .status(HTTP_SUCCESS)
+                .json({
+                    ...serializedGroups
+                })
         } catch (error) {
-
             return response.status(HTTP_SERVER_ERROR).json(error)
-
         }
     }
 
@@ -26,10 +34,15 @@ class GroupController {
                 .where('id', id)
                 .first()
 
+            const serializedGroup = {
+                ...group,
+                image_url: `IP_UPLOAD_PATH${group.image}`
+            }
+
             return response
                 .status(HTTP_SUCCESS)
                 .json({
-                    ...group
+                    ...serializedGroup
                 })
 
         } catch (error) {
@@ -50,30 +63,29 @@ class GroupController {
                 description,
                 occupation_area,
                 rules,
-                image
             } = request.body
 
 
             const id = await knex('groups')
                 .insert({
                     name,
+                    image: request.file.filename,
                     date,
                     description,
                     occupation_area,
                     rules,
-                    image
                 })
 
             return response
-                .status(HTTP_SUCCESS)
+                .status(HTTP_CREATED)
                 .json({
                     id,
+                    image: request.file.filename,
                     name,
                     date,
                     description,
                     occupation_area,
                     rules,
-                    image
                 })
 
         } catch (error) {
