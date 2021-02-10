@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import Home from './pages/Home'
 import './App.css';
-import Header from './pages/Headers/Header'
 
 function App() {
   return (
-   <h1>
-     
-   </h1>
+    <Home />
   );
 }
 
