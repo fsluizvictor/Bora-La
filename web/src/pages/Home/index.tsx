@@ -1,5 +1,6 @@
 import React from 'react'
-import { FiLogIn } from 'react-icons/fi'
+import { FiLogIn,FiEdit } from 'react-icons/fi'
+import {Link} from 'react-router-dom'
 
 import './styles.css'
 
@@ -10,19 +11,27 @@ const Home = () => {
     return (
         <div id="page-home">
             <div className="content">
-                <header>
+                <header> 
                     <img src={logo} alt="Bora Lá" />
                 </header>
 
                 <main>
                     <h1>Seu fórum de estudos</h1>
-                    <p>Ajudamos estudantes a </p>
-
-                    <span>
-                        <FiLogIn />
-                    </span>
-                    <strong>Cadastre um ponto de coleta</strong>
-
+                    <p>Ajudamos estudantes a compartilharem ideias de forma eficiente.</p>
+                    <div className="buttons-container">
+                        <Link to="/">
+                            <span>
+                                <FiLogIn />
+                            </span>
+                            <strong>Entrar</strong>
+                        </Link>
+                        <Link to="/CreateUser">
+                            <span>
+                                <FiEdit/> 
+                            </span>
+                            <strong>Se cadastrar</strong>
+                        </Link>
+                    </div>
                 </main>
             </div>
         </div>

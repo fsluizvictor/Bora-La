@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Home from './pages/Home'
+import Routes from './routes'
 import './App.css';
 
 function App() {
   return (
-    <Home />
+    <Routes />
   );
 }
 

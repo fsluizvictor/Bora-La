@@ -1,6 +1,6 @@
 #page-home {
     height: 100vh;
-    background: url('../../assets/home_whithout_background.svg') no-repeat 500px bottom;
+    background: url('../../assets/home/home_whithout_background.svg') no-repeat 700px bottom;
 }
 
 #page-home .content {
@@ -74,7 +74,26 @@
 }
 
 #page-home .content main a:hover {
-    background: #2FB86E;
+    background: #98ded9;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 3.2rem 0;
+}
+
+.buttons-container a {
+    width: 30rem;
+    height: 10.4rem;
+    border-radius: 0.8rem;
+    margin-right: 1.6rem;
+    font: 700 2.0rem bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
 }
 
 @media(max-width: 900px) {
