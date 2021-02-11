@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
+import { TileLayer, Marker, MapContainer } from 'react-leaflet'
+import { IBGEUFResponse } from '../../utils/types/types'
+import apiIbge from '../../services/apiIbge'
+import api from '../../services/api'
+
 
 import logo from '../../assets/logo/logo.svg'
 
 import './styles.css'
 
 const CreateUser = () => {
+
+    const [ufs, setUfs] = useState<string[]>([])
+
+    useEffect(() => {
+        apiIbge.get<IBGEUFResponse[]>('estados').then(response => {
+            const ufInitials = response.data.map(uf => uf.sigla)
+            setUfs(ufInitials)
+        })
+    }, [])
+
     return (
         <div id="page-create-point">
             <header>
@@ -90,11 +105,24 @@ const CreateUser = () => {
                         <h2>Endereço</h2>
                         <span>Selecione o endereço no mapa</span>
                     </legend>
+
+                    <MapContainer center={[-19.4754561, -42.6391334]} zoom={15}>
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={[-19.4754561, -42.6391334]} />
+                    </MapContainer>
+
+
                     <div className="field-group">
                         <div className="field">
                             <label htmlFor="">Estado (UF)</label>
                             <select name="uf" id="uf">
                                 <option value="0">Selecione uma UF</option>
+                                {ufs.map(uf => (
+                                    <option key={uf} value={uf}>{uf}</option>
+                                ))}
                             </select>
                         </div>
                         <div className="field">
@@ -115,6 +143,7 @@ const CreateUser = () => {
                         <textarea value="" />
                     </div>
                 </fieldset>
+                <button type="submit">Cadastrar estudante</button>
 
             </form>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { THeaderProps } from '../../utils/types/type_HeaderProps'
+import { THeaderProps } from '../../utils/types/types'
 //React.FC == Tipo Genérico que pode receber parâmetros
 
 
