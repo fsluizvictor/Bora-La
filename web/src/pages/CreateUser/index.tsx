@@ -7,6 +7,8 @@ import { IBGEUFResponse, IBGECITYResponse } from '../../utils/types/types'
 import apiIbge from '../../services/apiIbge'
 import api from '../../services/api'
 
+import Dropzone from '../../components/Dropzone'
+
 import logo from '../../assets/logo/logo.svg'
 
 import './styles.css'
@@ -19,6 +21,8 @@ const CreateUser = () => {
     const [selectedUf, setSelectedUF] = useState('0')
     const [selectedCity, setSelectedCity] = useState('0')
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0])
+
+    const [selectedFile, setSelectedFile] = useState<File>()
 
     const [formData, setFormData] = useState({
         name: '',
@@ -111,19 +115,27 @@ const CreateUser = () => {
         const city = selectedCity
         const [latitude, longitude] = selectedPosition
 
-        const data = {
-            name,
-            email,
-            whatsapp,
-            registration,
-            birth,
-            password,
-            description,
-            uf,
-            city,
-            latitude,
-            longitude
+        const data = new FormData()
+
+
+
+        data.append('name', name)
+        data.append('email', email)
+        data.append('whatsapp', whatsapp)
+        data.append('registration', registration)
+        data.append('birth', birth)
+        data.append('password', password)
+        data.append('description', description)
+        data.append('uf', uf)
+        data.append('city', city)
+        data.append('latitude', String(latitude))
+        data.append('longitude', String(longitude))
+
+        if (selectedFile) {
+            data.append('image', selectedFile)
         }
+
+        console.log(data)
 
         await api.post('users', data)
 
@@ -145,6 +157,8 @@ const CreateUser = () => {
             </header>
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do Estudante :)</h1>
+
+                <Dropzone onFileUploaded={setSelectedFile} />
 
                 <fieldset>
                     <legend>

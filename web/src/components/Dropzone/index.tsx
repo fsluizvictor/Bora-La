@@ -8,7 +8,7 @@ interface Props {
     onFileUploaded: (file: File) => void
 }
 
-const Dropzone: React.FC<Props> = ({onFileUploaded}) => {
+const Dropzone: React.FC<Props> = ({ onFileUploaded }) => {
 
     const [selectedFileUrl, setSelectedFileUrl] = useState('')
 
@@ -34,7 +34,7 @@ const Dropzone: React.FC<Props> = ({onFileUploaded}) => {
                 : (
                     <p>
                         <FiUpload />
-                    Imagem do estabelecimento
+                    Arraste ou selecione uma foto ;)
                     </p>
                 )
             }
