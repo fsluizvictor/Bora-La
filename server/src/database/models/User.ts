@@ -8,6 +8,7 @@ export type TUser = {
     longitude: number
     birth: string
     course: string
+    whatsapp: string
     email: string
     password: string
     description: string

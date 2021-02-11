@@ -60,7 +60,7 @@ class UserController {
     }
 
     async create(request: Request, response: Response) {
-        try {
+       // try {
 
             const {
                 name,
@@ -74,6 +74,7 @@ class UserController {
                 course,
                 email,
                 description,
+                whatsapp
             } = request.body
 
             const password = bcrypt.hashSync(request.body.password, 8)
@@ -92,6 +93,7 @@ class UserController {
                     email,
                     password,
                     description,
+                    whatsapp
                 })
 
             return response
@@ -109,14 +111,15 @@ class UserController {
                     course,
                     email,
                     description,
-                    password
+                    password,
+                    whatsapp
                 })
 
-        } catch (error) {
-            return response
-                .status(HTTP_SERVER_ERROR)
-                .json(error)
-        }
+        // } catch (error) {
+        //     return response
+        //         .status(HTTP_SERVER_ERROR)
+        //         .json(error)
+        // }
     }
 
     async update(request: Request, response: Response) {
