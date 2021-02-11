@@ -7,3 +7,7 @@ export type THeaderProps = {
 export type IBGEUFResponse = {
     sigla: string
 }
+
+export type IBGECITYResponse = {
+    nome: string
+}
