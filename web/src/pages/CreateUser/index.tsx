@@ -107,12 +107,15 @@ const CreateUser = () => {
                 </fieldset>
 
                 <fieldset>
-                    <legend>
-                        <h2>Descrição</h2>
-                        <span>Fale um pouco sobre você :)</span>
-                    </legend>
-                    
+                    <div className="field">
+                        <legend>
+                            <h2>Descrição</h2>
+                            <span>Fale um pouco sobre você :)</span>
+                        </legend>
+                        <textarea value="" />
+                    </div>
                 </fieldset>
+
             </form>
         </div>
     )
