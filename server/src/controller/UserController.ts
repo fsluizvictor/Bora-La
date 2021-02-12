@@ -41,7 +41,7 @@ class UserController {
 
             const serializedUser = {
                 ...user,
-                image_url: `http://192.168.15.15:3333/uploads/${user.image}`
+                image_url: `http://192.168.15.3:3333/uploads/${user.image}`
             }
 
             return response

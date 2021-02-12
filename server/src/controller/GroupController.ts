@@ -55,7 +55,7 @@ class GroupController {
     }
 
     async create(request: Request, response: Response) {
-        try {
+        //try {
 
             const {
                 name,
@@ -81,20 +81,20 @@ class GroupController {
                 .json({
                     id,
                     image: request.file.filename,
-                    name,
-                    date,
+                    name, 
+                    date, 
                     description,
                     occupation_area,
                     rules,
                 })
 
-        } catch (error) {
+        // } catch (error) {
 
-            return response
-                .status(HTTP_SERVER_ERROR)
-                .json(error)
+        //     return response
+        //         .status(HTTP_SERVER_ERROR)
+        //         .json(error)
 
-        }
+        // }
     }
 
     async update(request: Request, response: Response) {
@@ -106,7 +106,7 @@ class GroupController {
                 name,
                 date,
                 description,
-                occupation_area,
+                occupation_area, 
                 rules
             } = request.body
 
