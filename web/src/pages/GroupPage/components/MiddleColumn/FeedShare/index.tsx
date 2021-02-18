@@ -12,32 +12,46 @@ import {
 } from './styles';
 
 const FeedShare: React.FC = () => {
+
+  async function handleSubmit() {
+
+  }
+
+  function handleTextAreaChange() {
+    
+  }
+
   return (
     <Panel>
       <Container>
-        <div className="write">
-          <WriteIcon />
-          {/* <textarea/>
-          <span>Começar uma publicação</span> */}
-        </div>
-        <div className="attachment">
-          <button>
-            <CameraIcon />
+        <form onSubmit={handleSubmit}>
+          <div className="write">
+            <WriteIcon />
+            <textarea onChange={handleTextAreaChange}/>
+            
+            {/* <span>Começar uma publicação</span> */}
+          </div>
+          <div className="attachment">
+            <button>
+              <CameraIcon />
             Foto
           </button>
-          <button>
-            <VideoCameraIcon />
+            <button>
+              <VideoCameraIcon />
             Video
           </button>
-          <button>
-            <DocumentIcon />
+            <button>
+              <DocumentIcon />
             Documento
           </button>
-          <button>
-            <ArticleIcon />
+            <button
+              type="submit"
+            >
+              <ArticleIcon />
             Escrever artigo
           </button>
-        </div>
+          </div>
+        </form>
       </Container>
     </Panel>
   );

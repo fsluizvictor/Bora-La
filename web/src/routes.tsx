@@ -4,6 +4,7 @@ import { Route, BrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import CreateUser from './pages/CreateUser'
 import CreateGroup from './pages/CreateGroup'
+import Layout from './pages/GroupPage/components/Layout'
 
 const Routes = () => {
     return (
@@ -11,6 +12,7 @@ const Routes = () => {
             <Route component={Home} path="/" exact />
             <Route component={CreateUser} path="/CreateUser" />
             <Route component={CreateGroup} path="/CreateGroup" />
+            <Route component={Layout} path="/Layout" />
         </BrowserRouter>
 
     )

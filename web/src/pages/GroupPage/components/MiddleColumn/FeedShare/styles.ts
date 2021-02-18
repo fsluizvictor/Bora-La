@@ -7,6 +7,7 @@ import {
   AiOutlineProfile,
 } from 'react-icons/ai';
 
+
 export const Container = styled.div`
   color: var(--color-gray);
 
@@ -19,7 +20,21 @@ export const Container = styled.div`
       margin-left: 8px;
       font-weight: 600;
     }
-  }
+
+    > textarea {
+      width: 100%;
+      border-style: none;
+      border-color: transparent;
+      overflow: auto;
+      resize: none;
+      display: flex;
+      align-items: center;
+      padding: 18px 24px;
+      outline:0;
+      border: 0 none;
+    }
+
+   }
   .attachment {
     display: none;
 

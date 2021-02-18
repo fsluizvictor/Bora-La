@@ -4,6 +4,7 @@ import LoadingTrendingPanel from '../Shimmer/LoadingTrendingPanel'
 import TrendingPanel from './TrendingPanel';
 
 import { Container } from './styles';
+import { LoadingProps } from '../../../../utils/types/types';
 
 const RightColumn: React.FC<LoadingProps> = ({ isLoading }) => {
   return (

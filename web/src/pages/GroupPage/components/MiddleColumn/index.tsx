@@ -6,6 +6,7 @@ import FeedShare from './FeedShare';
 import LoadingFeedPost from '../Shimmer/LoadingFeedPost';
 
 import { Container } from './styles';
+import { LoadingProps } from '../../../../utils/types/types';
 
 const MiddleColumn: React.FC<LoadingProps> = ({ isLoading }) => {
   return (

@@ -5,6 +5,7 @@ import ProfilePanel from './ProfilePanel';
 import HashtagPanel from './HashtagPanel';
 
 import { Container } from './styles';
+import { LoadingProps } from '../../../../utils/types/types';
 
 const LeftColumn: React.FC<LoadingProps> = ({ isLoading }) => {
   return (

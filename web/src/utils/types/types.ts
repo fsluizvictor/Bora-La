@@ -11,3 +11,7 @@ export type IBGEUFResponse = {
 export type IBGECITYResponse = {
     nome: string
 }
+
+export type LoadingProps = {
+    isLoading: boolean
+}
