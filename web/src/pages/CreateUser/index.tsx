@@ -156,7 +156,7 @@ const CreateUser = () => {
                 </Link>
             </header>
             <form onSubmit={handleSubmit}>
-                <h1>Cadastro do Estudante :)</h1>
+                <h1>Bora se cadastrar :)</h1>
 
                 <Dropzone onFileUploaded={setSelectedFile} />
 

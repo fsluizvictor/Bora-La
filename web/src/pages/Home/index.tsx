@@ -29,7 +29,7 @@ const Home = () => {
                             <span>
                                 <FiEdit/> 
                             </span>
-                            <strong>Se cadastrar</strong>
+                            <strong>Cadastrar</strong>
                         </Link>
                     </div>
                 </main>
