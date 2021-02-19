@@ -5,6 +5,7 @@ import {
   AiOutlineVideoCamera,
   AiOutlineFileText,
   AiOutlineProfile,
+  AiOutlineSend
 } from 'react-icons/ai';
 
 
@@ -22,7 +23,7 @@ export const Container = styled.div`
     }
 
     > textarea {
-      width: 100%;
+      width: auto;
       border-style: none;
       border-color: transparent;
       overflow: auto;
@@ -32,6 +33,8 @@ export const Container = styled.div`
       padding: 18px 24px;
       outline:0;
       border: 0 none;
+      margin-left: 8px;
+      font-weight: 600;
     }
 
    }
@@ -93,6 +96,11 @@ export const DocumentIcon = styled(AiOutlineFileText)`
 `;
 
 export const ArticleIcon = styled(AiOutlineProfile)`
+  ${iconCSS}
+  color: #ef7e37;
+`;
+
+export const SendIcon = styled(AiOutlineSend)`
   ${iconCSS}
   color: #ef7e37;
 `;

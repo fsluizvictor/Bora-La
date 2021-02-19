@@ -1,24 +1,38 @@
-import React from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import DropzoneImage from '../../Dropzone/DropzoneImage';
+import DropzoneVideo from '../../Dropzone/DropzoneVideo';
+import DropzoneDocument from '../../Dropzone/DropzoneDocument';
 
 import Panel from '../../Panel';
 
 import {
   Container,
   WriteIcon,
-  CameraIcon,
-  VideoCameraIcon,
-  DocumentIcon,
-  ArticleIcon,
+  SendIcon
 } from './styles';
 
 const FeedShare: React.FC = () => {
+
+  const [selectedImage, setselectedImage] = useState<File>()
+  const [selectedVideo, setselectedVideo] = useState<File>()
+  const [selectedDocument, setselectedDocument] = useState<File>()
+
+  const [formData, setFormtData] = useState({
+    textFeedShare: ''
+  })
 
   async function handleSubmit() {
 
   }
 
-  function handleTextAreaChange() {
-    
+  function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
+
+    const { name, value } = event.target
+
+    setFormtData({
+      ...formData,
+      [name]: value
+    })
   }
 
   return (
@@ -27,28 +41,46 @@ const FeedShare: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <div className="write">
             <WriteIcon />
-            <textarea onChange={handleTextAreaChange}/>
-            
+            <textarea
+              id="textFeedShare"
+              name="textFeedShare"
+              placeholder="Começar uma publicação"
+              value={formData.textFeedShare}
+              onChange={handleTextAreaChange}
+            />
+
             {/* <span>Começar uma publicação</span> */}
           </div>
           <div className="attachment">
-            <button>
+            <DropzoneImage
+              onFileUploaded={setselectedImage}
+            />
+            {/* <button>
               <CameraIcon />
             Foto
-          </button>
-            <button>
+          </button> */}
+            <DropzoneVideo
+              onFileUploaded={setselectedVideo}
+            />
+
+            {/* <button>
               <VideoCameraIcon />
             Video
-          </button>
-            <button>
+          </button> */}
+
+            <DropzoneDocument
+              onFileUploaded={setselectedDocument}
+            />
+
+            {/* <button>
               <DocumentIcon />
             Documento
-          </button>
+          </button> */}
             <button
               type="submit"
             >
-              <ArticleIcon />
-            Escrever artigo
+              <SendIcon />
+            Publicar
           </button>
           </div>
         </form>
