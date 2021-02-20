@@ -2,6 +2,7 @@ import express, { request, response } from 'express'
 
 import GroupController from './controller/GroupController'
 import UserController from './controller/UserController'
+import GroupPageController from './controller/GroupPageController'
 
 import multer from 'multer'
 import multerConfig from './config_multer/multer'
@@ -11,6 +12,8 @@ const upload = multer(multerConfig)
 
 const userController = new UserController()
 const groupController = new GroupController()
+const groupPageController = new GroupPageController()
+
 
 routes
     .get('/users', userController.index)
@@ -25,5 +28,10 @@ routes
     .post('/groups', upload.single('image'), groupController.create)
     .put('/groups/:id', groupController.update)
     .delete('/gorups/:id', groupController.delete)
+
+routes
+    .get('/groups_page/posts', groupPageController.indexPosts)
+    .get('/groups_page/attachments', groupPageController.indexAttachments)
+    .post('/groups_page', upload.single('image'), groupPageController.createPost)
 
 export default routes 
