@@ -4,7 +4,6 @@ export async function up(knex: Knex) {
     return knex.schema.createTable('attachments', table => {
         table.increments('id').primary().notNullable()
         table.integer('id_post').references('id').inTable('posts').notNullable()
-        table.string('type')
         table.string('url')
     })
 }

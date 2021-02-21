@@ -21,7 +21,7 @@ class GroupPageController {
 
     async indexAttachments(request: Request, response: Response) {
         try {
-            const results = await knex('posts').select('*')
+            const results = await knex('attachments').select('*')
 
             return response
                 .status(HTTP_SUCCESS)
@@ -36,63 +36,67 @@ class GroupPageController {
 
 
     async createPost(request: Request, response: Response) {
-        try {
-            const {
+        //try {
+
+        const {
+            id_group
+        } = request.params
+
+        const {
+            contents,
+            date,
+            like,
+            ban,
+        } = request.body
+
+        const id_post = await knex('posts')
+            .insert({
                 id_group,
                 contents,
                 date,
                 like,
-                ban,
-                url,
-                type
-            } = request.body
+                ban
+            })
 
-            const id_post = await knex('posts')
+        const url = request.file.filename
+
+        if (url) {
+            const id_attachment = await knex('attachments')
                 .insert({
+                    id_post,
+                    url: request.file.filename,
+                })
+
+            return response
+                .status(HTTP_CREATED)
+                .json({
                     id_group,
                     contents,
                     date,
                     like,
-                    ban
+                    ban,
+                    id_post,
+                    url: request.file.filename,
+                    id_attachment
                 })
-
-            if (type && url) {
-                const id_attachment = await knex('attachments')
-                    .insert({
-                        id_post,
-                        url: request.file.filename,
-                        type
-                    })
-
-                return response
-                    .status(HTTP_CREATED)
-                    .json({
-                        id_group,
-                        contents,
-                        date,
-                        like,
-                        ban,
-                        id_post,
-                        url: request.file.filename,
-                        type,
-                        id_attachment
-                    })
-            } else {
-                return response
-                    .status(HTTP_CREATED)
-                    .json({
-                        id_group,
-                        contents,
-                        date,
-                        like,
-                        ban,
-                    })
-            }
-
-        } catch (error) {
-            return response.status(HTTP_SERVER_ERROR).json({ error })
+        } else {
+            return response
+                .status(HTTP_CREATED)
+                .json({
+                    id_group,
+                    contents,
+                    date,
+                    like,
+                    ban,
+                })
         }
+
+        // } catch (error) {
+        //     return response.status(HTTP_SERVER_ERROR).json({ error })
+        // }
     }
+
+
 }
 
 export default GroupPageController

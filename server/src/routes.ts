@@ -32,6 +32,6 @@ routes
 routes
     .get('/groups_page/posts', groupPageController.indexPosts)
     .get('/groups_page/attachments', groupPageController.indexAttachments)
-    .post('/groups_page', upload.single('image'), groupPageController.createPost)
-
+    .post('/groups_page/:id_group', upload.single('image'), groupPageController.createPost)
+    
 export default routes 
