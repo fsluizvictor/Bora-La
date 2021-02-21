@@ -12,7 +12,7 @@ const Routes = () => {
             <Route component={Home} path="/" exact />
             <Route component={CreateUser} path="/CreateUser" />
             <Route component={CreateGroup} path="/CreateGroup" />
-            <Route component={Layout} path="/Layout" />
+            <Route component={Layout} path="/groups_page" />
         </BrowserRouter>
 
     )

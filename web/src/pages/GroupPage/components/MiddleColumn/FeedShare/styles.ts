@@ -23,7 +23,7 @@ export const Container = styled.div`
     }
 
     > textarea {
-      width: auto;
+      width: 100%;
       border-style: none;
       border-color: transparent;
       overflow: auto;
@@ -39,7 +39,7 @@ export const Container = styled.div`
 
    }
   .attachment {
-    display: none;
+    display: flex;
 
     @media (min-width: 1180px) {
       display: flex;

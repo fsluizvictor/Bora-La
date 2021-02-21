@@ -1,7 +1,9 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom'
 import DropzoneImage from '../../Dropzone/DropzoneImage';
 import DropzoneVideo from '../../Dropzone/DropzoneVideo';
 import DropzoneDocument from '../../Dropzone/DropzoneDocument';
+import api from '../../../../../services/api'
 
 import Panel from '../../Panel';
 
@@ -16,13 +18,38 @@ const FeedShare: React.FC = () => {
   const [selectedImage, setselectedImage] = useState<File>()
   const [selectedVideo, setselectedVideo] = useState<File>()
   const [selectedDocument, setselectedDocument] = useState<File>()
+  const history = useHistory()
 
   const [formData, setFormtData] = useState({
-    textFeedShare: ''
+    contents: ''
   })
 
-  async function handleSubmit() {
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault()
 
+    const {
+      contents
+    } = formData
+
+    const data = new FormData()
+
+    data.append('contents', contents)
+
+    if (selectedImage) {
+      data.append('image', selectedImage)
+    }
+
+    if (selectedDocument) {
+      data.append('image', selectedDocument)
+    }
+
+    if (selectedVideo) {
+      data.append('image', selectedVideo)
+    }
+
+    await api.post('groups_page/1', data)
+
+    history.push('/groups_page')
   }
 
   function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -42,10 +69,9 @@ const FeedShare: React.FC = () => {
           <div className="write">
             <WriteIcon />
             <textarea
-              id="textFeedShare"
-              name="textFeedShare"
+              id="contents"
+              name="contents"
               placeholder="Começar uma publicação"
-              value={formData.textFeedShare}
               onChange={handleTextAreaChange}
             />
 
