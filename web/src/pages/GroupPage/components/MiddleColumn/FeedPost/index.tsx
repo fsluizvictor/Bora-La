@@ -61,12 +61,19 @@ const FeedPost: React.FC = () => {
             <span>Enviar</span>
           </button>
         </Row>
-        {/* <Avatar src="https://i.imgur.com/81RtXfT.jpg" alt="Rocketseat" />
-        <textarea/>
-        <button>
+
+        <Row>
+          <Separator />
+        </Row>
+
+        <Row>
+          <Avatar src="https://i.imgur.com/81RtXfT.jpg" alt="Rocketseat" />
+          <textarea />
+          <button>
             <SendIcon />
-            <span>Enviar</span>
-          </button> */}
+          </button>
+        </Row>
+
       </Container>
     </Panel>
   );
