@@ -34,6 +34,21 @@ class GroupPageController {
         }
     }
 
+    async indexComents(request: Request, response: Response) {
+        //try {
+        const results = await knex('coments').select('*')
+
+        return response
+            .status(HTTP_SUCCESS)
+            .json({
+                results
+            })
+
+        // } catch (error) {
+        //     return response.status(HTTP_SERVER_ERROR).json({ error })
+        // }
+    }
+
 
     async createPost(request: Request, response: Response) {
         //try {
@@ -90,6 +105,38 @@ class GroupPageController {
                     ban,
                 })
         }
+
+        // } catch (error) {
+        //     return response.status(HTTP_SERVER_ERROR).json({ error })
+        // }
+    }
+
+    async createComent(request: Request, response: Response) {
+        //try {
+        const {
+            id_post,
+        } = request.params
+
+        const {
+            contents,
+            date
+        } = request.body
+
+        const id = knex('coments')
+            .insert({
+                id_post,
+                contents,
+                date
+            })
+
+        return response
+            .status(HTTP_CREATED)
+            .json({
+                id,
+                id_post,
+                contents,
+                date
+            })
 
         // } catch (error) {
         //     return response.status(HTTP_SERVER_ERROR).json({ error })
