@@ -19,7 +19,7 @@ import {
 
 
 const FeedPost: React.FC = () => {
-  
+
   const [formData, setFormData] = useState({
     contents: ''
   })
@@ -31,11 +31,19 @@ const FeedPost: React.FC = () => {
       contents
     } = formData
 
-    const data = new FormData()
+    setFormData({
+      contents: ""
+    })
 
-    data.append('contents', contents)
+    const data = {
+      contents
+    }
 
     await api.post('groups_page/coments/1', data)
+
+  }
+
+  function resetTextArea() {
 
   }
 
@@ -47,6 +55,7 @@ const FeedPost: React.FC = () => {
       ...formData,
       [name]: value
     })
+
   }
 
   return (
@@ -107,6 +116,7 @@ const FeedPost: React.FC = () => {
               id="contents"
               name="contents"
               placeholder="Insira um comentário..."
+              value={formData.contents}
               onChange={handleTextAreaChange}
             />
             <button>

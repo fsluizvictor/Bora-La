@@ -10,22 +10,22 @@ const ProfilePanel: React.FC = () => {
       <Container>
         <div className="profile-cover"></div>
         <img
-          src="https://github.com/guilhermerodz.png"
+          src="https://www.youtz.com.br/wp-content/uploads/2019/10/YOUTZ-MATEMATICA-ENEM-870x420.jpg"
           alt="Avatar"
           className="profile-picture"
         />
-        <h1>Guilherme Rodz</h1>
-        <h2>Software Engineer @ Rocketseat</h2>
+        <h1>Cálculo 1</h1>
+        <h2>Ciências Exatas e da Terra</h2>
 
         <div className="separator"></div>
 
         <div className="key-value">
-          <span className="key">Quem viu seu perfil</span>
-          <span className="value">1.558</span>
+          <span className="key">Quantidade de membros</span>
+          <span className="value">100</span>
         </div>
         <div className="key-value">
-          <span className="key">Viram sua publicação</span>
-          <span className="value">388</span>
+          <span className="key">Quantidade de posts</span>
+          <span className="value">50</span>
         </div>
       </Container>
     </Panel>

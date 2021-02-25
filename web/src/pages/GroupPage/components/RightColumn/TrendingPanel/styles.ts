@@ -50,3 +50,10 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const ProfileCircle = styled.img`
+width: 24px;
+height: 24px;
+border-radius: 50%;
+border: 1px solid var(--coloroo-icons)
+`;

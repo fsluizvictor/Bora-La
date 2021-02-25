@@ -49,7 +49,8 @@ const FeedShare: React.FC = () => {
 
     await api.post('groups_page/1', data)
 
-    history.push('/groups_page')
+    window.location.reload()
+    //history.push('/groups_page')
   }
 
   function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {

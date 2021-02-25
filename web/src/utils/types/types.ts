@@ -15,3 +15,8 @@ export type IBGECITYResponse = {
 export type LoadingProps = {
     isLoading: boolean
 }
+
+export type TUsersGroup = {
+    name: string,
+    nickname: string
+}
