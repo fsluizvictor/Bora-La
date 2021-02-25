@@ -64,10 +64,10 @@ const FeedPost: React.FC = () => {
         <form onSubmit={handleSubmit} >
 
           <Row className="heading">
-            <Avatar src="https://i.imgur.com/81RtXfT.jpg" alt="Rocketseat" />
+            <Avatar src="https://github.com/fsluizvictor.png" alt="Member" />
             <Column>
-              <h3>Rocketseat</h3>
-              <h4>Instituição de ensino</h4>
+              <h3>Luiz Victor Ferreira Santos</h3>
+              <h4>Engenharia de Computação</h4>
               <time>1 sem</time>
             </Column>
           </Row>
@@ -111,7 +111,7 @@ const FeedPost: React.FC = () => {
           </Row>
 
           <Row>
-            <Avatar src="https://i.imgur.com/81RtXfT.jpg" alt="Rocketseat" />
+            <Avatar src="https://github.com/fsluizvictor.png" alt="Rocketseat" />
             <textarea
               id="contents"
               name="contents"

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { GrLinkedin } from 'react-icons/gr'
+import { GrCatalog, } from 'react-icons/gr'
 import { AiFillHome, AiOutlineBell, AiFillCaretDown } from 'react-icons/ai'
 
 const generalIconCSS = css`
@@ -66,7 +66,7 @@ export const Wrapper = styled.div`
 
 `;
 
-export const LinkedinIcon = styled(GrLinkedin)`
+export const LinkedinIcon = styled(GrCatalog)`
     width: 34px;
     height: 34px;
     color: var(--color-linkedin);
