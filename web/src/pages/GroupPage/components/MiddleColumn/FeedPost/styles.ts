@@ -18,6 +18,27 @@ export const Row = styled.div`
   display: flex;
   margin: 0 16px;
 
+>textarea{
+  width: 100%;
+  height: 48px;
+  -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  resize: none;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  padding: 18px 24px;
+  outline: 0;
+  margin: 0 4px 8px 0;
+}
+
+>button{
+  margin: 0 4px 8px 0;
+  background-color: #98ded9; 
+  border-radius:10%;
+}
+
   &.heading {
     padding: 12px 0 8px;
 

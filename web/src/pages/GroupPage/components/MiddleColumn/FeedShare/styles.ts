@@ -27,6 +27,7 @@ export const Container = styled.div`
       border-style: none;
       border-color: transparent;
       overflow: auto;
+      overflow-y: hidden;
       resize: none;
       display: flex;
       align-items: center;

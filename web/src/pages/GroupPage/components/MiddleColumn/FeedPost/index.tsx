@@ -106,6 +106,7 @@ const FeedPost: React.FC = () => {
             <textarea
               id="contents"
               name="contents"
+              placeholder="Insira um comentário..."
               onChange={handleTextAreaChange}
             />
             <button>
