@@ -57,11 +57,14 @@ class GroupPageController {
             id_group
         } = request.params
 
+        const how = new Date()
+        const day = how.getDate()
+        const month = how.getMonth() + 1
+        const year = how.getFullYear()
+        const date = day + '/' + month + '/' + year
+
         const {
             contents,
-            date,
-            like,
-            ban,
         } = request.body
 
         const id_post = await knex('posts')
@@ -69,13 +72,9 @@ class GroupPageController {
                 id_group,
                 contents,
                 date,
-                like,
-                ban
             })
 
-        const url = request.file.filename
-
-        if (url) {
+        if (request.file.filename) {
             const id_attachment = await knex('attachments')
                 .insert({
                     id_post,
@@ -88,8 +87,6 @@ class GroupPageController {
                     id_group,
                     contents,
                     date,
-                    like,
-                    ban,
                     id_post,
                     url: request.file.filename,
                     id_attachment
@@ -101,8 +98,6 @@ class GroupPageController {
                     id_group,
                     contents,
                     date,
-                    like,
-                    ban,
                 })
         }
 
@@ -119,15 +114,20 @@ class GroupPageController {
 
         const {
             contents,
-            date
         } = request.body
 
-        const id = knex('coments')
+        const how = new Date()
+        const day = how.getDate()
+        const month = how.getMonth() + 1
+        const year = how.getFullYear()
+        const date = day + '/' + month + '/' + year
+
+        const id =  await knex('coments')
             .insert({
                 id_post,
                 contents,
                 date
-            })
+            })  
 
         return response
             .status(HTTP_CREATED)
