@@ -12,7 +12,7 @@ class GroupController {
             const serializedGroups = results.map(group => {
                 return {
                     ...group,
-                    image_url: `IP_UPLOAD_PATH${group.image}`
+                    image_url: `${IP_UPLOAD_PATH}${group.image}`
                 }
             })
 
@@ -36,7 +36,7 @@ class GroupController {
 
             const serializedGroup = {
                 ...group,
-                image_url: `IP_UPLOAD_PATH${group.image}`
+                image_url: `${IP_UPLOAD_PATH}${group.image}`
             }
 
             return response

@@ -12,6 +12,8 @@ export const HTTP_SERVER_ERROR = 500
 export const HTTP_UNAVAILABLE_SERVICE = 503
 export const HTTP_TIMEOUT_ERROR = 504
 
-export const IP_UPLOAD_PATH = 'http://192.168.15.15:3333/uploads/'
+const ip = require('ip')
+const ip_now = ip.address()
+export const IP_UPLOAD_PATH = `http://192.168.15.7:3333/uploads/`
 
 
