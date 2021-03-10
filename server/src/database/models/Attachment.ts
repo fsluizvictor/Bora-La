@@ -1,4 +1,5 @@
 export type TAttachments = {
-    id_pots: number
+    id: number
+    id_post: number
     url: string
 }

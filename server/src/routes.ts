@@ -31,6 +31,7 @@ routes
 
 routes
     .get('/groups_page/posts', groupPageController.indexPosts)
+    .get('/groups_page/posts/:id_group', groupPageController.indexFeedPosts)
     .get('/groups_page/attachments', groupPageController.indexAttachments)
     .get('/groups_page/coments', groupPageController.indexComents)
     .post('/groups_page/:id_group', upload.single('image'), groupPageController.createPost)
