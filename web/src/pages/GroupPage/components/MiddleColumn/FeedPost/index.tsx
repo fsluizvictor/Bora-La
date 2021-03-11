@@ -1,5 +1,6 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import api from '../../../../../services/api';
+import { TPost } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
@@ -16,12 +17,17 @@ import {
   SendIcon,
 } from './styles';
 
-
-
 const FeedPost: React.FC = () => {
 
+  const [contentFeedPost, setContentFeedPost] = useState<TPost>()
   const [formData, setFormData] = useState({
     contents: ''
+  })
+
+  useEffect(() => {
+    api.get('groups_page/posts/1').then(response => {
+      setContentFeedPost(response.data)
+    })
   })
 
   async function handleSubmit(event: FormEvent) {
@@ -39,11 +45,7 @@ const FeedPost: React.FC = () => {
       contents
     }
 
-    await api.post('groups_page/coments/1', data)
-
-  }
-
-  function resetTextArea() {
+    await api.post('groups_page/coments/1/1', data)
 
   }
 
@@ -64,11 +66,11 @@ const FeedPost: React.FC = () => {
         <form onSubmit={handleSubmit} >
 
           <Row className="heading">
-            <Avatar src="https://github.com/fsluizvictor.png" alt="Member" />
+            <Avatar src={contentFeedPost?.user.image_url} alt="Member" />
             <Column>
-              <h3>Luiz Victor Ferreira Santos</h3>
-              <h4>Engenharia de Computação</h4>
-              <time>1 sem</time>
+              <h3>{contentFeedPost?.user.name}</h3>
+              <h4>{contentFeedPost?.user.course}</h4>
+              <time>{contentFeedPost?.date}</time>
             </Column>
           </Row>
           <PostImage

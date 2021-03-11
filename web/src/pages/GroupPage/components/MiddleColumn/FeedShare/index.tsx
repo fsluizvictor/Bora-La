@@ -47,7 +47,7 @@ const FeedShare: React.FC = () => {
       data.append('image', selectedVideo)
     }
 
-    await api.post('groups_page/1', data)
+    await api.post('groups_page/1/1', data)
 
     window.location.reload()
     //history.push('/groups_page')
