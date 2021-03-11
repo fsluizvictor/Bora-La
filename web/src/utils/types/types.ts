@@ -39,7 +39,7 @@ export type TPost = {
     like: number
     ban: boolean
     coments: Array<TComent>
-    attachment: Array<TAttachments>
+    attachment: TAttachments
     user: TUser
 }
 

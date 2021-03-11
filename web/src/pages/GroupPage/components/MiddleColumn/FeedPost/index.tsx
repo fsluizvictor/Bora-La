@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import api from '../../../../../services/api';
-import { TPost } from '../../../../../utils/types/types';
+import { TComent, TPost } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
@@ -19,7 +19,7 @@ import {
 
 const FeedPost: React.FC = () => {
 
-  const [contentFeedPost, setContentFeedPost] = useState<TPost>()
+  const [contentFeedPost, setContentFeedPost] = useState<TPost[]>([])
   const [formData, setFormData] = useState({
     contents: ''
   })
@@ -61,74 +61,117 @@ const FeedPost: React.FC = () => {
   }
 
   return (
-    <Panel>
-      <Container>
-        <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit} >
+      {contentFeedPost.map((post) => (
 
-          <Row className="heading">
-            <Avatar src={contentFeedPost?.user.image_url} alt="Member" />
-            <Column>
-              <h3>{contentFeedPost?.user.name}</h3>
-              <h4>{contentFeedPost?.user.course}</h4>
-              <time>{contentFeedPost?.date}</time>
-            </Column>
-          </Row>
-          <PostImage
-            src="https://blog.rocketseat.com.br/content/images/2019/05/Painel.png"
-            alt="Rocketseat Blog"
-          />
+        <>
+          <Panel>
+            <Container>
+              <Row className="heading">
+                <Avatar src={post.user.image_url} alt="Member" />
+                <Column>
+                  <h3>{post.user.name}</h3>
+                  <h4>Engenharia de Computação</h4>
+                  <time>{post.date}</time>
+                </Column>
+              </Row>
 
-          <Row className="likes">
-            <span className="circle blue" />
-            <span className="circle green" />
-            <span className="circle red" />
-            <span className="number">49</span>
-          </Row>
+              <Row>
+                <Separator />
+              </Row>
 
-          <Row>
-            <Separator />
-          </Row>
+              <Row>
+                <p>
+                  {post.contents}
+                </p>
+              </Row>
 
-          <Row className="actions">
-            <button>
-              <LikeIcon />
-              <span>Gostei</span>
-            </button>
-            <button>
-              <CommentIcon />
-              <span>Comentar</span>
-            </button>
-            <button>
-              <ShareIcon />
-              <span>Compartilhar</span>
-            </button>
-            <button>
-              <SendIcon />
-              <span>Enviar</span>
-            </button>
-          </Row>
+              <Row>
+                <Separator />
+              </Row>
 
-          <Row>
-            <Separator />
-          </Row>
+              {post.attachment
+                ?
+                <PostImage
+                  src={post.attachment.url}
+                  alt="Rocketseat Blog"
+                />
+                : null
+              }
 
-          <Row>
-            <Avatar src="https://github.com/fsluizvictor.png" alt="Rocketseat" />
-            <textarea
-              id="contents"
-              name="contents"
-              placeholder="Insira um comentário..."
-              value={formData.contents}
-              onChange={handleTextAreaChange}
-            />
-            <button>
-              <SendIcon />
-            </button>
-          </Row>
-        </form>
+              <Row className="likes">
+                <span className="circle blue" />
+                <span className="circle green" />
+                <span className="circle red" />
+                <span className="number">49</span>
+              </Row>
 
-      </Container>
-    </Panel>
+              <Row>
+                <Separator />
+              </Row>
+
+              <Row className="actions">
+                <button>
+                  <LikeIcon />
+                  <span>Gostei</span>
+                </button>
+                <button>
+                  <CommentIcon />
+                  <span>Comentar</span>
+                </button>
+                <button>
+                  <ShareIcon />
+                  <span>Compartilhar</span>
+                </button>
+                <button>
+                  <SendIcon />
+                  <span>Enviar</span>
+                </button>
+              </Row>
+
+              <Row>
+                <Separator />
+              </Row>
+
+              <Row>
+                <Avatar src="https://github.com/fsluizvictor.png" alt="Rocketseat" />
+                <textarea
+                  id="contents"
+                  name="contents"
+                  placeholder="Insira um comentário..."
+                  value={formData.contents}
+                  onChange={handleTextAreaChange}
+                />
+                <button>
+                  <SendIcon />
+                </button>
+              </Row>
+
+              <Row>
+                <Separator />
+              </Row>
+
+              {post.coments.map((coment: TComent) => {
+                <Row className="coment">
+                  <Avatar src={coment.user.image_url} alt="Member" />
+                  <Column>
+                    <h3>{coment.user.name}</h3>
+                    <h4>Engenharia de Computação</h4>
+                    <time>{coment.date}</time>
+                  </Column>
+                  <p>{coment.contents}</p>
+                </Row>
+              })}
+
+              <Row>
+                <Separator />
+              </Row>
+
+            </Container>
+          </Panel>
+        </>
+      ))}
+    </form>
   );
 };
 

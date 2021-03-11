@@ -53,6 +53,20 @@ export const Row = styled.div`
       color: var(--color-gray);
     }
   }
+  &.coment {
+    padding: 12px 0 8px;
+
+    h3 {
+      font-size: 14px;
+      color: var(--color-black);
+    }
+    h4,
+    time {
+      font-size: 12px;
+      font-weight: normal;
+      color: var(--color-gray);
+    }
+  }
   &.likes {
     padding: 8px 0;
     font-size: 12px;
