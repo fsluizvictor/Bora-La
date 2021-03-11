@@ -3,6 +3,7 @@ import knex from '../database/connection'
 import { TAttachments } from '../database/models/Attachment'
 import { TComent } from '../database/models/Coment'
 import { TPost } from '../database/models/Post'
+import { TUser } from '../database/models/User'
 import { HTTP_CREATED, HTTP_SERVER_ERROR, HTTP_SUCCESS } from '../utils/consts'
 
 class GroupPageController {
@@ -56,7 +57,8 @@ class GroupPageController {
         try {
 
             const {
-                id_group
+                id_group,
+                id_user
             } = request.params
 
             const posts = await knex('posts')
@@ -68,28 +70,51 @@ class GroupPageController {
             const attachment_all = await knex('attachments')
                 .select('*')
 
+            const users_all = await knex('users')
+                .select('*')
+
+            const complet_coment = coment_all.map((coment: TComent) => {
+
+                const user = users_all.filter((user: TUser) => {
+                    return user.id === coment.user.id
+                })
+
+                return {
+                    id: coment.id,
+                    id_post: coment.id_post,
+                    contents: coment.contents,
+                    date: coment.date,
+                    user: user
+                }
+            })
+
             const finalPosts = posts.map((post: TPost) => {
 
-                const coments = coment_all.filter((element: TComent) => {
-                    return element.id_post === post.id
+                const coments = complet_coment.filter((coment: any) => {
+                    return coment.id_post === post.id
                 })
 
                 const attachment = attachment_all.filter((element: TAttachments) => {
                     return element.id_post === post.id
                 })
 
+                const user = users_all.filter((element: TUser) => {
+                    return element.id === post.user.id
+                })
+
                 return {
                     ...post,
                     coments: coments,
-                    attachment: attachment
+                    attachment: attachment,
+                    user: user
                 }
             })
 
             return response
                 .status(HTTP_SUCCESS)
-                .json({
+                .json(
                     finalPosts
-                })
+                )
 
         } catch (error) {
             return response.status(HTTP_SERVER_ERROR).json({ error })
@@ -102,7 +127,8 @@ class GroupPageController {
         try {
 
             const {
-                id_group
+                id_group,
+                id_user
             } = request.params
 
             const how = new Date()
@@ -118,6 +144,7 @@ class GroupPageController {
             const id_post = await knex('posts')
                 .insert({
                     id_group,
+                    id_user,
                     contents,
                     date,
                 })
@@ -133,6 +160,7 @@ class GroupPageController {
                     .status(HTTP_CREATED)
                     .json({
                         id_group,
+                        id_user,
                         contents,
                         date,
                         id_post,
@@ -144,6 +172,7 @@ class GroupPageController {
                     .status(HTTP_CREATED)
                     .json({
                         id_group,
+                        id_user,
                         contents,
                         date,
                     })
@@ -158,6 +187,7 @@ class GroupPageController {
         try {
             const {
                 id_post,
+                id_user
             } = request.params
 
             const {
@@ -173,6 +203,7 @@ class GroupPageController {
             const id = await knex('coments')
                 .insert({
                     id_post,
+                    id_user,
                     contents,
                     date
                 })
@@ -182,12 +213,15 @@ class GroupPageController {
                 .json({
                     id,
                     id_post,
+                    id_user,
                     contents,
                     date
                 })
 
         } catch (error) {
-            return response.status(HTTP_SERVER_ERROR).json({ error })
+            return response
+                .status(HTTP_SERVER_ERROR)
+                .json({ error })
         }
     }
 

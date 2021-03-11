@@ -1,5 +1,6 @@
 import { TAttachments } from "./Attachment";
 import { TComent } from "./Coment";
+import { TUser } from "./User";
 
 export type TPost = {
     id: number
@@ -10,4 +11,5 @@ export type TPost = {
     ban: boolean
     coments: Array<TComent>
     attachment: Array<TAttachments>
+    user: TUser 
 }

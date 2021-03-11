@@ -4,6 +4,7 @@ export async function up(knex: Knex) {
     return knex.schema.createTable('coments', table => {
         table.increments('id').primary().notNullable()
         table.integer('id_post').references('id').inTable('posts').notNullable()
+        table.integer('id_user').references('id').inTable('users').notNullable()
         table.string('contents')
         table.string('date')
     })
