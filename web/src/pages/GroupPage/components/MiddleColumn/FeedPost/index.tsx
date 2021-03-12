@@ -25,10 +25,10 @@ const FeedPost: React.FC = () => {
   })
 
   useEffect(() => {
-    api.get('groups_page/posts/1').then(response => {
+    api.get<TPost[]>('groups_page/posts/1').then(response => {
       setContentFeedPost(response.data)
     })
-  })
+  },[])
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -94,7 +94,7 @@ const FeedPost: React.FC = () => {
                 ?
                 <PostImage
                   src={post.attachment.url}
-                  alt="Rocketseat Blog"
+                  alt="Attachment"
                 />
                 : null
               }
@@ -136,7 +136,7 @@ const FeedPost: React.FC = () => {
               <Row>
                 <Avatar src="https://github.com/fsluizvictor.png" alt="Rocketseat" />
                 <textarea
-                  id="contents"
+                  id={String(post.id)}
                   name="contents"
                   placeholder="Insira um comentário..."
                   value={formData.contents}

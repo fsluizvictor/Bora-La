@@ -14,8 +14,6 @@ const RightColumn: React.FC<LoadingProps> = ({ isLoading }) => {
         <LoadingTrendingPanel />
       ) : (
           <>
-            {/* <TrendingUsers />
-            <TrendingUsers /> */}
            <TrendingPanel />
           </>
         )}

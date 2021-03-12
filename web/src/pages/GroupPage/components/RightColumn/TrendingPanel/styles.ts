@@ -51,6 +51,18 @@ export const Container = styled.div`
   }
 `;
 
+export const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  > strong {
+    font-size: 14px;
+  }
+  > span {
+    font-size: 14px;
+    color: var(--gray);
+  }
+`;
+
 export const ProfileCircle = styled.img`
 width: 24px;
 height: 24px;
