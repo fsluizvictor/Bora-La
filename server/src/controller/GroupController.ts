@@ -55,46 +55,46 @@ class GroupController {
     }
 
     async create(request: Request, response: Response) {
-        //try {
+        try {
 
-        const {
-            name,
-            date,
-            description,
-            occupation_area,
-            rules,
-        } = request.body
-
-
-        const id = await knex('groups')
-            .insert({
-                name,
-                image: request.file.filename,
-                date,
-                description,
-                occupation_area,
-                rules,
-            })
-
-        return response
-            .status(HTTP_CREATED)
-            .json({
-                id,
-                image: request.file.filename,
+            const {
                 name,
                 date,
                 description,
                 occupation_area,
                 rules,
-            })
+            } = request.body
 
-        // } catch (error) {
 
-        //     return response
-        //         .status(HTTP_SERVER_ERROR)
-        //         .json(error)
+            const id = await knex('groups')
+                .insert({
+                    name,
+                    image: request.file.filename,
+                    date,
+                    description,
+                    occupation_area,
+                    rules,
+                })
 
-        // }
+            return response
+                .status(HTTP_CREATED)
+                .json({
+                    id,
+                    image: request.file.filename,
+                    name,
+                    date,
+                    description,
+                    occupation_area,
+                    rules,
+                })
+
+        } catch (error) {
+
+            return response
+                .status(HTTP_SERVER_ERROR)
+                .json(error)
+
+        }
     }
 
     async update(request: Request, response: Response) {

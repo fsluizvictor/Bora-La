@@ -31,10 +31,12 @@ routes
 
 routes
     .get('/groups_page/posts', groupPageController.indexPosts)
+    .get('/groups_page/members/:id_group', groupPageController.indexMembersGroup)
     .get('/groups_page/posts/:id_group', groupPageController.indexFeedPosts)
     .get('/groups_page/attachments', groupPageController.indexAttachments)
     .get('/groups_page/coments', groupPageController.indexComents)
     .post('/groups_page/:id_group/:id_user', upload.single('image'), groupPageController.createPost)
     .post('/groups_page/coments/:id_post/:id_user', groupPageController.createComent)
+    .post('/groups_page/add/:id_group/:id_user', groupPageController.addMemberToGroup)
 
-export default routes 
+export default routes

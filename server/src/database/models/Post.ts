@@ -5,6 +5,7 @@ import { TUser } from "./User";
 export type TPost = {
     id: number
     id_group: number
+    id_user: number
     contents: string
     date: Date
     like: number

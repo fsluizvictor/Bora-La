@@ -4,9 +4,53 @@ import { TAttachments } from '../database/models/Attachment'
 import { TComent } from '../database/models/Coment'
 import { TPost } from '../database/models/Post'
 import { TUser } from '../database/models/User'
-import { HTTP_CREATED, HTTP_SERVER_ERROR, HTTP_SUCCESS } from '../utils/consts'
+import { HTTP_CREATED, HTTP_SERVER_ERROR, HTTP_SUCCESS, IP_UPLOAD_PATH } from '../utils/consts'
 
 class GroupPageController {
+
+    async indexMembersGroup(request: Request, response: Response) {
+        try {
+
+            const {
+                id_group
+            } = request.params
+
+            const users_group = await knex
+                .select('*')
+                .from('users')
+                .join('users_has_groups', 'users_has_groups.id_user', 'users.id')
+                .where('users_has_groups.id_group', '=', id_group)
+            console.log(users_group)
+            const users = users_group.map((user: TUser) => {
+                return {
+                    id: user.id,
+                    name: user.name,
+                    image_url: user.image_url,
+                    registration: user.registration,
+                    city: user.city,
+                    uf: user.uf,
+                    latitude: user.latitude,
+                    longitude: user.longitude,
+                    birth: user.birth,
+                    course: user.course,
+                    whatsapp: user.whatsapp,
+                    email: user.email,
+                    password: user.password,
+                    description: user.description
+                }
+            })
+
+            return response
+                .status(HTTP_SUCCESS)
+                .json(
+                    users
+                )
+
+        } catch (error) {
+            return response.status(HTTP_SERVER_ERROR).json({ error })
+        }
+    }
+
 
     async indexPosts(request: Request, response: Response) {
         try {
@@ -57,8 +101,7 @@ class GroupPageController {
         try {
 
             const {
-                id_group,
-                id_user
+                id_group
             } = request.params
 
             const posts = await knex('posts')
@@ -73,10 +116,11 @@ class GroupPageController {
             const users_all = await knex('users')
                 .select('*')
 
+
             const complet_coment = coment_all.map((coment: TComent) => {
 
                 const user = users_all.filter((user: TUser) => {
-                    return user.id === coment.user.id
+                    return user.id === coment.id_user
                 })
 
                 return {
@@ -84,7 +128,22 @@ class GroupPageController {
                     id_post: coment.id_post,
                     contents: coment.contents,
                     date: coment.date,
-                    user: user
+                    user: {
+                        id: user[0].id,
+                        name: user[0].name,
+                        image_url: `${IP_UPLOAD_PATH}${user[0].image}`,
+                        registration: user[0].registration,
+                        city: user[0].city,
+                        uf: user[0].uf,
+                        latitude: user[0].latitude,
+                        longitude: user[0].longitude,
+                        birth: user[0].birth,
+                        course: user[0].course,
+                        whatsapp: user[0].whatsapp,
+                        email: user[0].email,
+                        password: user[0].password,
+                        description: user[0].description
+                    }
                 }
             })
 
@@ -99,14 +158,56 @@ class GroupPageController {
                 })
 
                 const user = users_all.filter((element: TUser) => {
-                    return element.id === post.user.id
+                    return element.id === post.id_user
                 })
 
-                return {
-                    ...post,
-                    coments: coments,
-                    attachment: attachment,
-                    user: user
+                if (attachment[0]) {
+                    return {
+                        ...post,
+                        coments: coments,
+                        attachment: {
+                            id: attachment[0].id,
+                            id_post: attachment[0].id_post,
+                            url: `${IP_UPLOAD_PATH}${attachment[0].url}`
+                        },
+                        user: {
+                            id: user[0].id,
+                            name: user[0].name,
+                            image_url: `${IP_UPLOAD_PATH}${user[0].image}`,
+                            registration: user[0].registration,
+                            city: user[0].city,
+                            uf: user[0].uf,
+                            latitude: user[0].latitude,
+                            longitude: user[0].longitude,
+                            birth: user[0].birth,
+                            course: user[0].course,
+                            whatsapp: user[0].whatsapp,
+                            email: user[0].email,
+                            password: user[0].password,
+                            description: user[0].description
+                        }
+                    }
+                } else {
+                    return {
+                        ...post,
+                        coments: coments,
+                        user: {
+                            id: user[0].id,
+                            name: user[0].name,
+                            image_url: `${IP_UPLOAD_PATH}${user[0].image}`,
+                            registration: user[0].registration,
+                            city: user[0].city,
+                            uf: user[0].uf,
+                            latitude: user[0].latitude,
+                            longitude: user[0].longitude,
+                            birth: user[0].birth,
+                            course: user[0].course,
+                            whatsapp: user[0].whatsapp,
+                            email: user[0].email,
+                            password: user[0].password,
+                            description: user[0].description
+                        }
+                    }
                 }
             })
 
@@ -225,7 +326,34 @@ class GroupPageController {
         }
     }
 
+    async addMemberToGroup(request: Request, response: Response) {
+        try {
 
+            const {
+                id_group,
+                id_user
+            } = request.params
+
+            const id_users_has_groups = await knex('users_has_groups')
+                .insert({
+                    id_group,
+                    id_user
+                })
+
+            return response
+                .status(HTTP_CREATED)
+                .json({
+                    id_users_has_groups,
+                    id_group,
+                    id_user
+                })
+
+        } catch (error) {
+            return response
+                .status(HTTP_SERVER_ERROR)
+                .json({ error })
+        }
+    }
 }
 
 export default GroupPageController

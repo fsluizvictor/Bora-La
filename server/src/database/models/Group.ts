@@ -1,3 +1,5 @@
+import { TUser } from "./User";
+
 export type TGroup = {
     id: number
     name:   string
@@ -5,4 +7,5 @@ export type TGroup = {
     description: string
     occupation_area: string
     rules: string
+    users: Array<TUser>
 }

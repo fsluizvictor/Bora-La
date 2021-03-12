@@ -1,7 +1,7 @@
 import { Request, Response, json, request } from 'express'
 import knex from '../database/connection'
 import bcrypt from 'bcryptjs'
-import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED } from '../utils/consts'
+import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED, IP_UPLOAD_PATH } from '../utils/consts'
 
 class UserController {
 
@@ -14,7 +14,7 @@ class UserController {
             const serializedUsers = results.map(user => {
                 return {
                     ...user,
-                    image_url: `http://192.168.15.15:3333/uploads/${user.image}`
+                    image_url: `${IP_UPLOAD_PATH}${user.image}`
                 }
             })
 
@@ -41,7 +41,7 @@ class UserController {
 
             const serializedUser = {
                 ...user,
-                image_url: `http://192.168.15.3:3333/uploads/${user.image}`
+                image_url: `${IP_UPLOAD_PATH}${user.image}`
             }
 
             return response
