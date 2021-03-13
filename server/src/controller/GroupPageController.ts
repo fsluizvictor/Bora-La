@@ -211,6 +211,8 @@ class GroupPageController {
                 }
             })
 
+            finalPosts.reverse()
+
             return response
                 .status(HTTP_SUCCESS)
                 .json(
@@ -221,8 +223,6 @@ class GroupPageController {
             return response.status(HTTP_SERVER_ERROR).json({ error })
         }
     }
-
-
 
     async createPost(request: Request, response: Response) {
         try {
