@@ -17,6 +17,7 @@ const groupPageController = new GroupPageController()
 
 routes
     .get('/users', userController.index)
+    .get('/users/groups/:id_user', userController.indexMyGroups)
     .get('/users/:id', userController.show)
     .post('/users', upload.single('image'), userController.create)
     .put('/users/:id', userController.update)
