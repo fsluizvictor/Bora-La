@@ -22,11 +22,12 @@ const MiddleColumn: React.FC<LoadingProps> = ({ isLoading }) => {
 
         </>
       ) : (
-          <>
-            <FeedShare />
+        <>
+          <div>
             <FeedPost />
-          </>
-        )}
+          </div>
+        </>
+      )}
     </Container>
   );
 };

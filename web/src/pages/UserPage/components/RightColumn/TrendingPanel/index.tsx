@@ -19,7 +19,7 @@ const TrendingPanel: React.FC = () => {
   return (
     <Container>
       <Panel>
-        <span className="title">Membros do Grupo</span>
+        <span className="title">Grupos do Sistema</span>
         <ul>
           {members_group.map((user: TUser) => (
             <li>
