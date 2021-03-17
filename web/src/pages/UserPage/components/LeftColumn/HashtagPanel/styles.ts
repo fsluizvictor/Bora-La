@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { FaHashtag, FaEdit } from 'react-icons/fa';
+import { FaHashtag, FaEdit, FaPeopleCarry } from 'react-icons/fa';
 
 export const Container = styled.div`
   position: sticky;
@@ -39,4 +39,10 @@ export const EditIcon = styled(FaEdit)`
   margin-right: 8px;
 `;
 
+export const GroupIcon = styled(FaPeopleCarry)`
+  width: 16px;
+  height: 16px;
+  color: var(--color-hashtag);
+  margin-right: 8px;
+`;
 

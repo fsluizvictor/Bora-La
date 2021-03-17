@@ -85,9 +85,9 @@ const CreateGroup = () => {
             <header>
                 <img src={logo} alt="Bora Lá" />
 
-                <Link to="/">
+                <Link to="/user_page">
                     <FiArrowLeft />
-                Voltar para home
+                Voltar para a Página
                 </Link>
             </header>
             <form onSubmit={handleSubmit}>

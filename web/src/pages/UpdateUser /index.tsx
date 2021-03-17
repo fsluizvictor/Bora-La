@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import { TileLayer, Marker, Map } from 'react-leaflet'
 import { LeafletMouseEvent } from 'leaflet'
@@ -13,7 +13,11 @@ import logo from '../../assets/logo/logo.svg'
 
 import './styles.css'
 
-const UpdateUser: React.FC<TUser> = (props) => {
+const UpdateUser: React.FC = () => {
+
+    const {
+        id_user
+    }: any = useParams()
 
     const [ufs, setUfs] = useState<string[]>([])
     const [cities, setCities] = useState<string[]>([])
@@ -24,6 +28,8 @@ const UpdateUser: React.FC<TUser> = (props) => {
 
     const [selectedFile, setSelectedFile] = useState<File>()
 
+    const [dataUser, setDataUser] = useState<TUser>()
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -33,6 +39,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
         password: '',
         description: ''
     })
+
 
     const [InicialPosition, setInicialPosition] = useState<[number, number]>([0, 0])
 
@@ -65,15 +72,23 @@ const UpdateUser: React.FC<TUser> = (props) => {
     }, [selectedUf])
 
 
+    console.log(id_user)
+
+    useEffect(() => {
+        api.get(`users/${id_user}`).then(response => {
+            setDataUser(response.data)
+        })
+    }, [])
+
+    console.log(dataUser)
+
     function handleSelectUF(event: ChangeEvent<HTMLSelectElement>) {
         const uf = event.target.value
-
         setSelectedUF(uf)
     }
 
     function handleSelectCity(event: ChangeEvent<HTMLSelectElement>) {
         const city = event.target.value
-
         setSelectedCity(city)
     }
 
@@ -137,7 +152,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
 
         console.log(data)
 
-        await api.post('users', data)
+        await api.put(`users/${dataUser?.id}`, data)
 
         history.push('/')
 
@@ -152,7 +167,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
 
                 <Link to="/user_page">
                     <FiArrowLeft />
-                Voltar para a Página 
+                Voltar para a Página
                 </Link>
             </header>
             <form onSubmit={handleSubmit}>
@@ -169,6 +184,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
                             type="text"
                             name="name"
                             id="name"
+                            value={dataUser?.name}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -180,6 +196,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
                                 type="email"
                                 name="email"
                                 id="email"
+                                value={dataUser?.email}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -189,6 +206,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
                                 type="text"
                                 name="whatsapp"
                                 id="whatsapp"
+                                value={dataUser?.whatsapp}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -200,6 +218,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
                                 type="text"
                                 name="registration"
                                 id="registration"
+                                value={dataUser?.registration}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -209,6 +228,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
                                 type="text"
                                 name="birth"
                                 id="birth"
+                                value={dataUser?.whatsapp}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -225,6 +245,7 @@ const UpdateUser: React.FC<TUser> = (props) => {
                             type="text"
                             name="password"
                             id="password"
+                            value={dataUser?.password}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -290,11 +311,12 @@ const UpdateUser: React.FC<TUser> = (props) => {
                         <textarea
                             name="description"
                             id="description"
+                            value={dataUser?.description}
                             onChange={handleTextAreaChange}
                         />
                     </div>
                 </fieldset>
-                <button type="submit">Cadastrar estudante</button>
+                <button type="submit">Alterar cadastro</button>
 
             </form>
         </div>

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../../../services/api';
 import { TUser } from '../../../../../utils/types/types';
-import { Link } from 'react-router-dom'
+import {
+  Link,
+  Route,
+  BrowserRouter as Router
+} from 'react-router-dom'
 
 import Panel from '../../Panel';
+import UpdateUser from '../../../../UpdateUser '
 
-import { Container, EditIcon } from './styles';
+import { Container, EditIcon, GroupIcon } from './styles';
 
 const HashtagPanel: React.FC = () => {
 
@@ -23,18 +28,22 @@ const HashtagPanel: React.FC = () => {
       <Panel>
         <span className="title">Descrição</span>
         <p>{dataUser?.description}</p>
+      </Panel>
+      <Panel>
         <span className="tag">
-          {console.log(dataUser?.email)}
-          <Link to={{
-            pathname: "/updateUser_page",
-            state: {...dataUser}
-          }}
-          >
+          <Link to='/updateUser_page/1'>
             <EditIcon />
-            Editar
+            Editar Perfil
+          </Link>
+        </span>
+        <span className="tag">
+          <Link to='/CreateGroup'>
+            <GroupIcon />
+            Criar Grupo
           </Link>
         </span>
       </Panel>
+
     </Container>
   );
 };

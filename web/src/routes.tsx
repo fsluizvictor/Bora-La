@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import Home from './pages/Home'
 import CreateUser from './pages/CreateUser'
@@ -10,14 +10,16 @@ import UpdateUser from './pages/UpdateUser '
 
 const Routes = () => {
     return (
-        <BrowserRouter>
-            <Route component={Home} path="/" exact />
-            <Route component={CreateUser} path="/CreateUser" />
-            <Route component={CreateGroup} path="/CreateGroup" />
-            <Route component={Layout} path="/groups_page" />
-            <Route component={LayoutUserPage} path="/user_page" />
-            <Route component={UpdateUser} path="/updateUser_page" />
-        </BrowserRouter>
+        <Router>
+            <Switch>
+                <Route component={Home} path="/" exact />
+                <Route component={CreateUser} path="/CreateUser" />
+                <Route component={CreateGroup} path="/CreateGroup" />
+                <Route component={Layout} path="/groups_page" />
+                <Route component={LayoutUserPage} path="/user_page" />
+                <Route path="/updateUser_page/:id_user" component={UpdateUser} />
+            </Switch>
+        </Router>
 
     )
 }
