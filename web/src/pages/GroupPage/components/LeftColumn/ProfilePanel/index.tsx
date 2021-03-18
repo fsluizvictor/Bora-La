@@ -6,12 +6,12 @@ import Panel from '../../Panel';
 
 import { Container } from './styles';
 
-const ProfilePanel: React.FC<TInfo> = ({ id_group, id_user }) => {
+const ProfilePanel: React.FC<TInfo> = ({ group_id, user_id }) => {
 
   const [profilePicture, setProfilePicture] = useState<TGroup>()
 
   useEffect(() => {
-    api.get<TGroup>(`groups/${id_group}`).then(response => {
+    api.get<TGroup>(`groups/${group_id}`).then(response => {
       setProfilePicture(response.data)
     })
   },[])

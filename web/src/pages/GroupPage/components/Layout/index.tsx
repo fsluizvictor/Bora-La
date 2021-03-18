@@ -22,10 +22,6 @@ const Layout: React.FC = () => {
         user_id
     } as TInfo
 
-    const [idInfo, setIdInfo] = useState<TInfo>()
-
-    setIdInfo(info)
-
     return (
         <Container>
             <MobileHeader />
@@ -34,9 +30,9 @@ const Layout: React.FC = () => {
                 <AdBanner />
             </span>
             <main>
-                <LeftColumn id_group={idInfo?.id_group} id_user={idInfo?.id_user} />
-                {/* <MiddleColumn isLoading={isLoading} />
-                <RightColumn isLoading={isLoading} /> */}
+                <LeftColumn group_id={info.group_id} user_id={info.user_id} />
+                <MiddleColumn group_id={group_id} user_id={user_id} />
+                <RightColumn group_id={group_id} user_id={user_id} />  
             </main>
         </Container>
     )

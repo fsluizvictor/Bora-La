@@ -30,7 +30,7 @@ const FeedPost: React.FC = () => {
       <Container>
         {contentGroup.map((group) => (
           <>
-            <Link to={`/groups_page/${group.id}/1`} >
+            <Link to={`/groups_page/1/1`} >
               <Row className="heading">
                 <Avatar src={group.image_url} alt="Member" />
                 <Column>

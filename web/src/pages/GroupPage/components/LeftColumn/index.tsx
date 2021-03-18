@@ -7,11 +7,11 @@ import HashtagPanel from './HashtagPanel';
 import { Container } from './styles';
 import { TInfo } from '../../../../utils/types/types';
 
-const LeftColumn: React.FC<TInfo> = ({ id_group, id_user }) => {
+const LeftColumn: React.FC<TInfo> = ({ group_id, user_id }) => {
   return (
     <Container className="left-column">
 
-      <ProfilePanel id_group={id_group} id_user={id_user} />
+      <ProfilePanel group_id={group_id} user_id={user_id} />
       {/* <HashtagPanel /> */}
 
     </Container>

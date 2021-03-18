@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../../../services/api';
-import { TUser } from '../../../../../utils/types/types';
+import { TInfo, TUser } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
 import { Container, ProfileCircle, Info } from './styles';
 
-const TrendingPanel: React.FC = () => {
+const TrendingPanel: React.FC<TInfo> = ({ group_id, user_id }) => {
 
   const [members_group, setMembersGroup] = useState<TUser[]>([])
 
   useEffect(() => {
-    api.get<TUser[]>('/groups_page/members/1').then((response) => {
+    api.get<TUser[]>(`/groups_page/members/${group_id}`).then((response) => {
       setMembersGroup(response.data)
     })
   }, [])

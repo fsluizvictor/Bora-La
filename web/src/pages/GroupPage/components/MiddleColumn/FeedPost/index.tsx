@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import api from '../../../../../services/api';
-import { TComent, TPost } from '../../../../../utils/types/types';
+import { TInfo, TPost } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
@@ -17,7 +17,7 @@ import {
   SendIcon,
 } from './styles';
 
-const FeedPost: React.FC = () => {
+const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
 
   const [contentFeedPost, setContentFeedPost] = useState<TPost[]>([])
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ const FeedPost: React.FC = () => {
   })
 
   useEffect(() => {
-    api.get<TPost[]>('groups_page/posts/1').then(response => {
+    api.get<TPost[]>(`groups_page/posts/${group_id}`).then(response => {
       setContentFeedPost(response.data)
     })
   }, [])
@@ -45,7 +45,7 @@ const FeedPost: React.FC = () => {
       contents
     }
 
-    await api.post('groups_page/coments/1/1', data)
+    await api.post(`groups_page/coments/${group_id}/${user_id}`, data)
 
   }
 

@@ -32,8 +32,8 @@ export type TGroup = {
 }
 
 export type TInfo = {
-    id_group?: number
-    id_user?: number
+    group_id?: number
+    user_id?: number
 }
 
 export type TPost = {
