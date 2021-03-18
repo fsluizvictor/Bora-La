@@ -15,7 +15,7 @@ const Routes = () => {
                 <Route component={Home} path="/" exact />
                 <Route component={CreateUser} path="/CreateUser" />
                 <Route component={CreateGroup} path="/CreateGroup" />
-                <Route component={Layout} path="/groups_page" />
+                <Route component={Layout} path="/groups_page/:group_id/:user_id" />
                 <Route component={LayoutUserPage} path="/user_page" />
                 <Route path="/updateUser_page/:id_user" component={UpdateUser} />
             </Switch>

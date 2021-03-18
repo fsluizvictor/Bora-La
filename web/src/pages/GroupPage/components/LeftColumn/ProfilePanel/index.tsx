@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../../../services/api';
-import { TGroup, TPost } from '../../../../../utils/types/types';
+import { TGroup, TInfo } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
 import { Container } from './styles';
 
-const ProfilePanel: React.FC = () => {
+const ProfilePanel: React.FC<TInfo> = ({ id_group, id_user }) => {
 
   const [profilePicture, setProfilePicture] = useState<TGroup>()
 
   useEffect(() => {
-    api.get('groups/1').then(response => {
+    api.get<TGroup>(`groups/${id_group}`).then(response => {
       setProfilePicture(response.data)
     })
-  })
+  },[])
 
+  console.log(profilePicture)
   return (
     <Panel>
       <Container>

@@ -31,6 +31,11 @@ export type TGroup = {
     image_url: string
 }
 
+export type TInfo = {
+    id_group?: number
+    id_user?: number
+}
+
 export type TPost = {
     id: number
     id_group: number

@@ -5,7 +5,6 @@ import TrendingPanel from './TrendingPanel';
 
 import { Container } from './styles';
 import { LoadingProps } from '../../../../utils/types/types';
-import TrendingUsers from './TrendingUsers';
 
 const RightColumn: React.FC<LoadingProps> = ({ isLoading }) => {
   return (

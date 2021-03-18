@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
+import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import api from '../../services/api'
@@ -19,7 +19,7 @@ const CreateGroup = () => {
         occupation_area: '',
         rules: '',
     })
-  
+
     const history = useHistory()
 
 
