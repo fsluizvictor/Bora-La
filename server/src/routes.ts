@@ -28,7 +28,7 @@ routes
     .get('/groups/:id', groupController.show)
     .post('/groups', upload.single('image'), groupController.create)
     .put('/groups/:id', groupController.update)
-    .delete('/gorups/:id', groupController.delete)
+    .delete('/groups/:id', groupController.delete)
 
 routes
     .get('/groups_page/posts', groupPageController.indexPosts)

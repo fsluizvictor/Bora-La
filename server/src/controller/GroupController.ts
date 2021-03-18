@@ -18,9 +18,9 @@ class GroupController {
 
             return response
                 .status(HTTP_SUCCESS)
-                .json({
-                    ...serializedGroups
-                })
+                .json(
+                    serializedGroups
+                )
         } catch (error) {
             return response.status(HTTP_SERVER_ERROR).json(error)
         }
@@ -41,9 +41,9 @@ class GroupController {
 
             return response
                 .status(HTTP_SUCCESS)
-                .json({
-                    ...serializedGroup
-                })
+                .json(
+                    serializedGroup
+                )
 
         } catch (error) {
 
