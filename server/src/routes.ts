@@ -25,6 +25,7 @@ routes
 
 routes
     .get('/groups', groupController.index)
+    .get('/groups/count/:group_id', groupController.countMembersPosts)
     .get('/groups/:id', groupController.show)
     .post('/groups', upload.single('image'), groupController.create)
     .put('/groups/:id', groupController.update)

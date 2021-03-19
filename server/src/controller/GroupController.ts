@@ -4,6 +4,34 @@ import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED, IP_UPLOAD_PATH } from '.
 
 class GroupController {
 
+    async countMembersPosts(request: Request, response: Response) {
+        try {
+
+            const {
+                group_id
+            } = request.params
+
+            const posts = await knex('posts')
+                .count<number>('id')
+                .where('id_group', group_id)
+                .first()
+
+            const members = await knex('users_has_groups')
+                .count<number>('id')
+                .where('id_group', group_id)
+                .first()
+
+            return response
+                .status(HTTP_SUCCESS)
+                .json({
+                    count_post: posts,
+                    count_members: members
+                })
+        } catch (error) {
+            return response.status(HTTP_SERVER_ERROR).json(error)
+        }
+    }
+
     async index(request: Request, response: Response) {
         try {
             const results = await knex('groups')
