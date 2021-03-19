@@ -11,7 +11,7 @@ import { TInfo } from '../../../../utils/types/types';
 const MiddleColumn: React.FC<TInfo> = ({ group_id, user_id }) => {
   return (
     <Container className="middle-column">
-      <FeedShare />
+      <FeedShare group_id={group_id} user_id={user_id} />
       <FeedPost group_id={group_id} user_id={user_id} />
     </Container>
   );

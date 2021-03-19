@@ -12,8 +12,9 @@ import {
   WriteIcon,
   SendIcon
 } from './styles';
+import { TInfo } from '../../../../../utils/types/types';
 
-const FeedShare: React.FC = () => {
+const FeedShare: React.FC<TInfo> = ({ group_id, user_id }) => {
 
   const [selectedImage, setselectedImage] = useState<File>()
   const [selectedVideo, setselectedVideo] = useState<File>()
@@ -47,7 +48,7 @@ const FeedShare: React.FC = () => {
       data.append('image', selectedVideo)
     }
 
-    await api.post('groups_page/1/1', data)
+    await api.post(`groups_page/${group_id}/1`, data)
 
     window.location.reload()
     //history.push('/groups_page')

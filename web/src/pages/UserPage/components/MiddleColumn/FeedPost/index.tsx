@@ -26,11 +26,11 @@ const FeedPost: React.FC = () => {
 
   return (
 
-    <Panel>
-      <Container>
-        {contentGroup.map((group) => (
-          <>
-            <Link to={`/groups_page/1/1`} >
+    <>
+      {contentGroup.map((group:TGroup) => (
+        <Panel>
+          <Container>
+            <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to={`/groups_page/${group.id}/1`} >
               <Row className="heading">
                 <Avatar src={group.image_url} alt="Member" />
                 <Column>
@@ -50,10 +50,10 @@ const FeedPost: React.FC = () => {
                 </p>
               </Row>
             </Link>
-          </>
-        ))}
-      </Container>
-    </Panel>
+          </Container>
+        </Panel>
+      ))}
+    </>
 
   );
 };
