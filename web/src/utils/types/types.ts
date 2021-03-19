@@ -36,6 +36,11 @@ export type TInfo = {
     user_id?: number
 }
 
+export type TCountMembersPosts = {
+    count_post : number
+    count_members : number
+}
+
 export type TPost = {
     id: number
     id_group: number

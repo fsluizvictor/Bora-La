@@ -4,6 +4,7 @@ import {
   RiMessage2Line,
   RiShareForwardLine,
   RiSendPlaneLine,
+  RiPoliceCarLine
 } from 'react-icons/ri';
 
 export const Container = styled.div`
@@ -165,6 +166,10 @@ export const CommentIcon = styled(RiMessage2Line)`
 `;
 
 export const ShareIcon = styled(RiShareForwardLine)`
+  ${iconCSS}
+`;
+
+export const DenounceIcon = styled(RiPoliceCarLine)`
   ${iconCSS}
 `;
 

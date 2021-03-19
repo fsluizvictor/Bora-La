@@ -33,102 +33,114 @@ export const Row = styled.div`
   margin: 0 4px 8px 0;
 }
 
->button{
-  margin: 0 4px 8px 0;
-  background-color: #98ded9; 
-  border-radius:10%;
+
+&.heading {
+  padding: 12px 0 8px;
+  
+  h3 {
+    font-size: 14px;
+    color: var(--color-black);
+  }
+  h4,
+  time {
+    font-size: 12px;
+    font-weight: normal;
+    color: var(--color-gray);
+  }
+}
+&.coment {
+  padding: 12px 0 8px;
+
+  h3 {
+    font-size: 14px;
+    color: var(--color-black);
+  }
+  h4,
+  time {
+    font-size: 12px;
+    font-weight: normal;
+    color: var(--color-gray);
+  }
+}
+&.likes {
+  padding: 8px 0;
+  font-size: 12px;
+  color: var(--color-gray);
+  
+  .circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    
+    &.blue {
+      background: #1385bd;
+    }
+    &.green {
+      background: #6dae4f;
+    }
+    &.red {
+      background: #df704c;
+    }
+    
+    & + .circle {
+      margin-left: 4px;
+    }
+  }
+  .number {
+    margin-left: 8px;
+  }
+}
+&.actions {
+  justify-content: space-between;
+  
+  @media (min-width: 1180px) {
+    justify-content: flex-start;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--color-gray);
+    font-size: 14px;
+    font-weight: 600;
+    
+    display: flex;
+    align-items: center;
+    padding: 14px 8px;
+
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    span {
+      display: none;
+      
+      @media (min-width: 1180px) {
+        display: unset;
+      }
+    }
+  }
 }
 
-  &.heading {
-    padding: 12px 0 8px;
-
-    h3 {
-      font-size: 14px;
-      color: var(--color-black);
-    }
-    h4,
-    time {
-      font-size: 12px;
-      font-weight: normal;
-      color: var(--color-gray);
-    }
-  }
-  &.coment {
-    padding: 12px 0 8px;
-
-    h3 {
-      font-size: 14px;
-      color: var(--color-black);
-    }
-    h4,
-    time {
-      font-size: 12px;
-      font-weight: normal;
-      color: var(--color-gray);
-    }
-  }
-  &.likes {
-    padding: 8px 0;
-    font-size: 12px;
+.exit{
+  
+  display: flex;
+  
+  button{
+    margin: 0 16px 0px 128px;
+    padding: 16px;
+    height: 100%;
+    align-items: center;
+    background: none;
+    border: none;
     color: var(--color-gray);
-
-    .circle {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-
-      &.blue {
-        background: #1385bd;
-      }
-      &.green {
-        background: #6dae4f;
-      }
-      &.red {
-        background: #df704c;
-      }
-
-      & + .circle {
-        margin-left: 4px;
-      }
-    }
-    .number {
-      margin-left: 8px;
-    }
+    font-weight: 600;
   }
-  &.actions {
-    justify-content: space-between;
+}
 
-    @media (min-width: 1180px) {
-      justify-content: flex-start;
-    }
-
-    button {
-      background: none;
-      border: none;
-      outline: none;
-      color: var(--color-gray);
-      font-size: 14px;
-      font-weight: 600;
-
-      display: flex;
-      align-items: center;
-      padding: 14px 8px;
-
-      cursor: pointer;
-      &:hover,
-      &:focus {
-        background: rgba(0, 0, 0, 0.05);
-      }
-
-      span {
-        display: none;
-
-        @media (min-width: 1180px) {
-          display: unset;
-        }
-      }
-    }
-  }
 `;
 
 export const PostImage = styled.img`

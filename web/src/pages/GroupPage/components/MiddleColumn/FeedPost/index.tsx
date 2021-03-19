@@ -15,6 +15,7 @@ import {
   CommentIcon,
   ShareIcon,
   SendIcon,
+  DenounceIcon,
 } from './styles';
 
 const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
@@ -44,11 +45,11 @@ const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
     const data = {
       contents
     }
-
     await api.post(`groups_page/coments/${group_id}/${user_id}`, data)
-
+    
   }
-
+  
+  //console.log("[TESTE]", group_id)
   function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
 
     const { name, value } = event.target
@@ -120,12 +121,8 @@ const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
                   <span>Comentar</span>
                 </button>
                 <button>
-                  <ShareIcon />
-                  <span>Compartilhar</span>
-                </button>
-                <button>
-                  <SendIcon />
-                  <span>Enviar</span>
+                  <DenounceIcon />
+                  <span>Denunciar</span>
                 </button>
               </Row>
 
@@ -150,7 +147,6 @@ const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
                 <Separator />
               </Row>
 
-              {console.log(post.coments)}
               {post.coments.map((coment) => (
                 <>
                   <Row className="coment">
