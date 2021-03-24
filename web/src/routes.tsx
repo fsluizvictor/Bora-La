@@ -7,6 +7,7 @@ import CreateGroup from './pages/CreateGroup'
 import Layout from './pages/GroupPage/components/Layout'
 import LayoutUserPage from './pages/UserPage/components/LayoutUserPage'
 import UpdateUser from './pages/UpdateUser '
+import Login from './pages/Login'
 
 const Routes = () => {
     return (
@@ -17,6 +18,7 @@ const Routes = () => {
                 <Route component={CreateGroup} path="/CreateGroup" />
                 <Route component={Layout} path="/groups_page/:group_id/:user_id" />
                 <Route component={LayoutUserPage} path="/user_page" />
+                <Route component={Login} path="/login" />
                 <Route path="/updateUser_page/:id_user" component={UpdateUser} />
             </Switch>
         </Router>
