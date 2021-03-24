@@ -3,6 +3,7 @@ import express, { request, response } from 'express'
 import GroupController from './controller/GroupController'
 import UserController from './controller/UserController'
 import GroupPageController from './controller/GroupPageController'
+import AuthController from './controller/AuthController'
 
 import multer from 'multer'
 import multerConfig from './config_multer/multer'
@@ -13,7 +14,10 @@ const upload = multer(multerConfig)
 const userController = new UserController()
 const groupController = new GroupController()
 const groupPageController = new GroupPageController()
+const authController = new AuthController()
 
+routes
+    .post('/auth', authController.isAuthorized)
 
 routes
     .get('/users', userController.index)

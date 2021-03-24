@@ -1,5 +1,6 @@
 export const HTTP_SUCCESS = 200
 export const HTTP_CREATED = 201
+export const HTTP_ACCEPTED = 202
 
 export const HTTP_NO_CONTENT = 204
 

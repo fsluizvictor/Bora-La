@@ -1,8 +1,9 @@
 import { Request, Response, json, request } from 'express'
 import knex from '../database/connection'
 import bcrypt from 'bcryptjs'
-import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED, IP_UPLOAD_PATH } from '../utils/consts'
+import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED, IP_UPLOAD_PATH, HTTP_NO_AUTHENTICATED, HTTP_ACCEPTED } from '../utils/consts'
 import { TGroup } from '../database/models/Group'
+import { TUser } from '../database/models/User'
 
 class UserController {
 
