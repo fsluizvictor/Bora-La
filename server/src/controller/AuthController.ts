@@ -14,14 +14,16 @@ class AuthController {
                 password
             } = request.body
 
+            console.log(1)
+
             const user: TUser = await knex('users')
                 .where('registration', registration)
                 .first()
 
             if (!user)
-                return response.status(HTTP_NO_AUTHENTICATED)
+                return response.sendStatus(HTTP_NO_AUTHENTICATED)
 
-            const isValidPassword = await bcrypt.compare(password, user.password)
+            const isValidPassword = bcrypt.compare(password, user.password)
 
             if (isValidPassword)
                 return response

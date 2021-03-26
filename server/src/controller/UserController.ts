@@ -95,48 +95,11 @@ class UserController {
     }
 
     async create(request: Request, response: Response) {
-        // try {
+        try {
 
-        const {
-            name,
-            image,
-            registration,
-            city,
-            uf,
-            latitude,
-            longitude,
-            birth,
-            course,
-            email,
-            description,
-            whatsapp
-        } = request.body
-
-        const password = bcrypt.hashSync(request.body.password, 8)
-
-        const id = await knex('users')
-            .insert({
+            const {
                 name,
-                registration,
-                image: request.file.filename,
-                city,
-                uf,
-                latitude,
-                longitude,
-                birth,
-                course,
-                email,
-                password,
-                description,
-                whatsapp
-            })
-
-        return response
-            .status(HTTP_CREATED)
-            .json({
-                id,
-                name,
-                image: request.file.filename,
+                image,
                 registration,
                 city,
                 uf,
@@ -146,15 +109,52 @@ class UserController {
                 course,
                 email,
                 description,
-                password,
                 whatsapp
-            })
+            } = request.body
 
-        // } catch (error) {
-        //     return response
-        //         .status(HTTP_SERVER_ERROR)
-        //         .json(error)
-        // }
+            const password = bcrypt.hashSync(request.body.password, 8)
+
+            const id = await knex('users')
+                .insert({
+                    name,
+                    registration,
+                    image: request.file.filename,
+                    city,
+                    uf,
+                    latitude,
+                    longitude,
+                    birth,
+                    course,
+                    email,
+                    password,
+                    description,
+                    whatsapp
+                })
+
+            return response
+                .status(HTTP_CREATED)
+                .json({
+                    id,
+                    name,
+                    image: request.file.filename,
+                    registration,
+                    city,
+                    uf,
+                    latitude,
+                    longitude,
+                    birth,
+                    course,
+                    email,
+                    description,
+                    password,
+                    whatsapp
+                })
+
+        } catch (error) {
+            return response
+                .status(HTTP_SERVER_ERROR)
+                .json(error)
+        }
     }
 
     async update(request: Request, response: Response) {
