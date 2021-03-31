@@ -14,28 +14,25 @@ class AuthController {
                 password
             } = request.body
 
-            console.log(1)
-
-            const user: TUser = await knex('users')
+            const user = await knex('users')
                 .where('registration', registration)
                 .first()
 
             if (!user)
                 return response.sendStatus(HTTP_NO_AUTHENTICATED)
 
-            const isValidPassword = bcrypt.compare(password, user.password)
+            //const crypto_password = bcrypt.hashSync(password, 8)
 
-            if (isValidPassword)
-                return response
-                    .status(HTTP_ACCEPTED)
-                    .json({
-                        ...user
-                    })
-            else
-                return response
-                    .status(HTTP_NO_AUTHENTICATED)
-                    .json({
-                    })
+            const isValidPassword = password === Number(user.password)
+
+            if (!isValidPassword)
+                return response.sendStatus(HTTP_NO_AUTHENTICATED)
+
+            return response
+                .status(HTTP_ACCEPTED)
+                .json(
+                    user
+                )
 
         } catch (error) {
 
@@ -44,5 +41,6 @@ class AuthController {
         }
     }
 }
+
 
 export default AuthController

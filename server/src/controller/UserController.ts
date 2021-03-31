@@ -112,7 +112,8 @@ class UserController {
                 whatsapp
             } = request.body
 
-            const password = bcrypt.hashSync(request.body.password, 8)
+            //const password = bcrypt.hashSync(request.body.password, 8)
+            const password = request.body.password
 
             const id = await knex('users')
                 .insert({
