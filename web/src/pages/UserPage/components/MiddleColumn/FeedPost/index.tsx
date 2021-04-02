@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../../../../services/api';
-import { TGroup } from '../../../../../utils/types/types';
+import { TGroup, TInfo } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
@@ -13,12 +13,12 @@ import {
   Column,
 } from './styles';
 
-const FeedPost: React.FC = () => {
+const FeedPost: React.FC<TInfo> = ({ user_id }) => {
 
   const [contentGroup, setContentGroup] = useState<TGroup[]>([])
 
   useEffect(() => {
-    api.get<TGroup[]>('/users/groups/1').then(response => {
+    api.get<TGroup[]>(`/users/groups/${user_id}`).then(response => {
       setContentGroup(response.data)
     })
   }, [])
@@ -33,11 +33,11 @@ const FeedPost: React.FC = () => {
             <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to={`/groups_page/${group.id - 1}/1`} >
               <Row className="heading">
                 <Avatar src={group.image_url} alt="Member" />
-                  <Column>
-                    <h3>{group.name}</h3>
-                    <h4>Ciências Exatas</h4>
-                    <time>{group.date}</time>
-                  </Column>
+                <Column>
+                  <h3>{group.name}</h3>
+                  <h4>Ciências Exatas</h4>
+                  <time>{group.date}</time>
+                </Column>
                 {/* <div className="exit">
                 
 

@@ -19,7 +19,7 @@ const Home = () => {
                     <h1>Seu fórum de estudos</h1>
                     <p>Ajudamos estudantes a compartilharem ideias de forma eficiente.</p>
                     <div className="buttons-container">
-                        <Link to="/">
+                        <Link to="/login">
                             <span>
                                 <FiLogIn />
                             </span>

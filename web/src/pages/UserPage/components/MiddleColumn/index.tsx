@@ -4,28 +4,14 @@ import FeedPost from './FeedPost';
 import LoadingFeedPost from '../Shimmer/LoadingFeedPost';
 
 import { Container } from './styles';
-import { LoadingProps } from '../../../../utils/types/types';
+import { TInfo } from '../../../../utils/types/types';
 
-const MiddleColumn: React.FC<LoadingProps> = ({ isLoading }) => {
+const MiddleColumn: React.FC<TInfo> = ({ user_id }) => {
   return (
     <Container className="middle-column">
-      {isLoading ? (
-        <>
-          <LoadingFeedPost />
-          <LoadingFeedPost />
-          <LoadingFeedPost />
-          <LoadingFeedPost />
-          <LoadingFeedPost />
-          <LoadingFeedPost />
-
-        </>
-      ) : (
-        <>
-          <div>
-            <FeedPost />
-          </div>
-        </>
-      )}
+      <div>
+        <FeedPost user_id={user_id} />
+      </div>
     </Container>
   );
 };

@@ -13,7 +13,7 @@ const LayoutUserPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const {
-        id
+        user_id
     }: any = useParams()
 
     useEffect(() => {
@@ -30,9 +30,9 @@ const LayoutUserPage: React.FC = () => {
                 <AdBanner />
             </span>
             <main>
-                <LeftColumn isLoading={isLoading} />
-                <MiddleColumn isLoading={isLoading} />
-                <RightColumn isLoading={isLoading} />
+                <LeftColumn user_id={user_id} />
+                <MiddleColumn user_id={user_id} />
+                <RightColumn />
             </main>
         </Container>
     )

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../../../services/api';
-import { TUser } from '../../../../../utils/types/types';
+import { TInfo, TUser } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
 import { Container } from './styles';
 
-const ProfilePanel: React.FC = () => {
+const ProfilePanel: React.FC<TInfo> = ({ user_id }) => {
 
   const [profilePicture, setProfilePicture] = useState<TUser>()
 
   useEffect(() => {
-    api.get('users/1').then(response => {
+    api.get(`users/${user_id}`).then(response => {
       setProfilePicture(response.data)
     })
-  },[])
+  }, [])
 
   return (
     <Panel>

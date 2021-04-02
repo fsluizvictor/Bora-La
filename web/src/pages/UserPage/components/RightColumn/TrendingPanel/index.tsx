@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../../../services/api';
-import { TGroup } from '../../../../../utils/types/types';
+import { TGroup, TInfo } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 

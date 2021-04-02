@@ -5,15 +5,15 @@ import ProfilePanel from './ProfilePanel';
 import HashtagPanel from './HashtagPanel';
 
 import { Container } from './styles';
-import { LoadingProps } from '../../../../utils/types/types';
+import { LoadingProps, TInfo } from '../../../../utils/types/types';
 
-const LeftColumn: React.FC<LoadingProps> = ({ isLoading }) => {
+const LeftColumn: React.FC<TInfo> = ({ user_id }) => {
   return (
     <Container className="left-column">
-        <>
-          <ProfilePanel />
-          <HashtagPanel />
-        </>
+      <>
+        <ProfilePanel user_id={user_id} />
+        <HashtagPanel user_id={user_id} />
+      </>
     </Container>
   );
 };
