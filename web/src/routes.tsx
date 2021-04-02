@@ -8,6 +8,7 @@ import Layout from './pages/GroupPage/components/Layout'
 import LayoutUserPage from './pages/UserPage/components/LayoutUserPage'
 import UpdateUser from './pages/UpdateUser '
 import Login from './pages/Login'
+import StoreProvider from './pages/Login/components/Store/Provider'
 
 const Routes = () => {
     return (
@@ -17,7 +18,7 @@ const Routes = () => {
                 <Route component={CreateUser} path="/CreateUser" />
                 <Route component={CreateGroup} path="/CreateGroup" />
                 <Route component={Layout} path="/groups_page/:group_id/:user_id" />
-                <Route component={LayoutUserPage} path="/user_page" />
+                <Route component={LayoutUserPage} path="/user_page/:id" />
                 <Route component={Login} path="/login" />
                 <Route path="/updateUser_page/:id_user" component={UpdateUser} />
             </Switch>

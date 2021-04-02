@@ -10,14 +10,10 @@ import { LoadingProps } from '../../../../utils/types/types';
 const LeftColumn: React.FC<LoadingProps> = ({ isLoading }) => {
   return (
     <Container className="left-column">
-      {isLoading ? (
-        <LoadingProfilePanel />
-      ) : (
         <>
           <ProfilePanel />
           <HashtagPanel />
         </>
-      )}
     </Container>
   );
 };

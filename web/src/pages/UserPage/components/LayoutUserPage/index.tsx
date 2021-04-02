@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'
 import MobileHeader from '../MobileHeader'
 import DesktopHeader from '../DesktopHeader'
 import AdBanner from '../AdBanner'
@@ -11,6 +12,10 @@ import { Container } from './styles';
 const LayoutUserPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true)
 
+    const {
+        id
+    }: any = useParams()
+
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false)
@@ -22,7 +27,7 @@ const LayoutUserPage: React.FC = () => {
             <MobileHeader />
             <DesktopHeader />
             <span>
-                {!isLoading && <AdBanner />}
+                <AdBanner />
             </span>
             <main>
                 <LeftColumn isLoading={isLoading} />

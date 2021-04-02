@@ -6,15 +6,16 @@ import api from '../../services/api'
 import logo from '../../assets/logo/logo.svg'
 
 import './styles.css'
+import { TUser } from '../../utils/types/types'
 
 const Login = () => {
-
-    const [selectedFile, setSelectedFile] = useState<File>()
 
     const [dataUser, setDataUser] = useState({
         name: '',
         password: ''
     })
+
+    const [user, setUser] = useState<TUser>()
 
     const history = useHistory()
 
@@ -31,10 +32,16 @@ const Login = () => {
         event.preventDefault()
 
         //resultado do retorno da api
-        const auth = await api.post('groups', dataUser)
+        //const auth = await api.post('groups', dataUser)
+        //setUser(auth)
 
+        console.log(dataUser)
+        api.get<TUser>(`auth/${dataUser.name}/${dataUser.password}`).then(response => {
+            setUser(response.data)
+        })
 
-        //history.push('/')
+        if (user)
+            history.push(`/user_page/${user.id}`)
 
     }
 
