@@ -10,12 +10,12 @@ class AuthController {
         try {
 
             const {
-                registration,
-                password
-            } = request.body
+                reg,
+                pass
+            } = request.params
 
             const user = await knex('users')
-                .where('registration', registration)
+                .where('registration', reg)
                 .first()
 
             if (!user)
@@ -23,7 +23,7 @@ class AuthController {
 
             //const crypto_password = bcrypt.hashSync(password, 8)
 
-            const isValidPassword = password === Number(user.password)
+            const isValidPassword = Number(pass) === Number(user.password)
 
             if (!isValidPassword)
                 return response.sendStatus(HTTP_NO_AUTHENTICATED)

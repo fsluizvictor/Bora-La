@@ -17,7 +17,7 @@ const groupPageController = new GroupPageController()
 const authController = new AuthController()
 
 routes
-    .post('/auth', authController.isAuthorized)
+    .get('/auth/:reg/:pass', authController.isAuthorized)
 
 routes
     .get('/users', userController.index)
