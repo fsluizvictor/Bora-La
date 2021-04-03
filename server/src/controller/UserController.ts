@@ -1,7 +1,7 @@
 import { Request, Response, json, request } from 'express'
 import knex from '../database/connection'
 import bcrypt from 'bcryptjs'
-import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED, IP_UPLOAD_PATH, HTTP_NO_AUTHENTICATED, HTTP_ACCEPTED } from '../utils/consts'
+import { HTTP_SUCCESS, HTTP_SERVER_ERROR, HTTP_CREATED, IP_UPLOAD_PATH, HTTP_NO_AUTHENTICATED, HTTP_ACCEPTED, HTTP_NO_CONTENT } from '../utils/consts'
 import { TGroup } from '../database/models/Group'
 import { TUser } from '../database/models/User'
 
@@ -109,11 +109,23 @@ class UserController {
                 course,
                 email,
                 description,
-                whatsapp
+                whatsapp,
+                password
             } = request.body
 
             //const password = bcrypt.hashSync(request.body.password, 8)
-            const password = request.body.password
+            //const password = request.body.password
+            if (!name || !registration || !city || !uf || !latitude || !longitude || !birth || !email
+                || !description || !whatsapp || !password || registration < 0)
+                return response
+                    .status(HTTP_NO_CONTENT)
+                    .json({ object: null })
+
+            //"http://192.168.15.7:3333/uploads/
+            if (!request.file.filename)
+                return response
+                    .status(HTTP_NO_CONTENT)
+                    .json({ object: null })
 
             const id = await knex('users')
                 .insert({
@@ -131,6 +143,11 @@ class UserController {
                     description,
                     whatsapp
                 })
+
+            if (!id)
+                return response
+                    .status(HTTP_NO_CONTENT)
+                    .json({ object: null })
 
             return response
                 .status(HTTP_CREATED)
