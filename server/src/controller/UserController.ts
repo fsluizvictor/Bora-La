@@ -95,43 +95,41 @@ class UserController {
     }
 
     async create(request: Request, response: Response) {
+
+        const {
+            name,
+            // image,
+            registration,
+            city,
+            uf,
+            latitude,
+            longitude,
+            birth,
+            course,
+            email,
+            description,
+            whatsapp,
+            password
+        } = request.body
+
+        //const password = bcrypt.hashSync(request.body.password, 8)
+        //const password = request.body.password
+        if (name === null || registration === null || city === null || uf === null || latitude === null
+            || longitude === null || birth === null || email === null || description === null
+            || whatsapp === null || password === null || Number(registration) < 0
+            || String(whatsapp).length < 8 || String(whatsapp).length > 12) {
+            return response
+                .status(HTTP_NO_CONTENT)
+                .json({ error: "Insuficient data" })
+        }
+
         try {
-
-            const {
-                name,
-                image,
-                registration,
-                city,
-                uf,
-                latitude,
-                longitude,
-                birth,
-                course,
-                email,
-                description,
-                whatsapp,
-                password
-            } = request.body
-
-            //const password = bcrypt.hashSync(request.body.password, 8)
-            //const password = request.body.password
-            if (!name || !registration || !city || !uf || !latitude || !longitude || !birth || !email
-                || !description || !whatsapp || !password || registration < 0)
-                return response
-                    .status(HTTP_NO_CONTENT)
-                    .json({ object: null })
-
-            //"http://192.168.15.7:3333/uploads/
-            if (!request.file.filename)
-                return response
-                    .status(HTTP_NO_CONTENT)
-                    .json({ object: null })
 
             const id = await knex('users')
                 .insert({
                     name,
                     registration,
-                    image: request.file.filename,
+                    //image: request.file.filename,
                     city,
                     uf,
                     latitude,
@@ -144,17 +142,12 @@ class UserController {
                     whatsapp
                 })
 
-            if (!id)
-                return response
-                    .status(HTTP_NO_CONTENT)
-                    .json({ object: null })
-
             return response
                 .status(HTTP_CREATED)
                 .json({
-                    id,
+                    //id,
                     name,
-                    image: request.file.filename,
+                    //image: request.file.filename,
                     registration,
                     city,
                     uf,
