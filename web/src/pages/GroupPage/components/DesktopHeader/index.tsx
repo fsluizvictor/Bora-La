@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import {
     Container,
     ProfileCircle,
@@ -16,24 +17,15 @@ const DesktopHeader: React.FC = () => {
             <Wrapper>
                 <div className="left">
                     <LinkedinIcon />
-                    <SearchInput placeholder="Pesquisar" />
                 </div>
                 <div className="right">
                     <nav>
-                        <button className="active">
-                            <HomeIcon />
-                            <span>Início</span>
-                        </button>
-                        <button>
-                            <NotificationsIcon />
-                            <span>Notificações</span>
-                        </button>
-                        <button>
-                            <ProfileCircle src="https://github.com/fsluizvictor.png" />
-                            <span>
-                                Eu <CaretDownIcon />
-                            </span>
-                        </button>
+                        <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to='/'>
+                            <button className="active">
+                                <HomeIcon />
+                                <span>Sair</span>
+                            </button>
+                        </Link>
                     </nav>
                 </div>
             </Wrapper>
