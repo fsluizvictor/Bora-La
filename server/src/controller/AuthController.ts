@@ -23,7 +23,7 @@ class AuthController {
 
             //const crypto_password = bcrypt.hashSync(password, 8)
 
-            const isValidPassword = Number(pass) === Number(user.password)
+            const isValidPassword = String(pass) === String(user.password)
 
             if (!isValidPassword)
                 return response.sendStatus(HTTP_NO_AUTHENTICATED)

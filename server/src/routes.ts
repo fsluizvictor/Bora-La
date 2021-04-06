@@ -23,8 +23,8 @@ routes
     .get('/users', userController.index)
     .get('/users/groups/:id_user', userController.indexMyGroups)
     .get('/users/:id', userController.show)
-    //.post('/users', upload.single('image'), userController.create)
-    .post('/users', userController.create)
+    .post('/users', upload.single('image'), userController.create)
+    //.post('/users', userController.create)
     .put('/users/:id', userController.update)
     .delete('/users/:id', userController.delete)
 

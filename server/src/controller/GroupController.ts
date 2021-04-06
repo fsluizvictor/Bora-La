@@ -91,10 +91,11 @@ class GroupController {
                 description,
                 occupation_area,
                 rules,
+                id_user
             } = request.body
 
 
-            const id = await knex('groups')
+            const id_group = await knex('groups')
                 .insert({
                     name,
                     image: request.file.filename,
@@ -104,10 +105,16 @@ class GroupController {
                     rules,
                 })
 
+            const id_users_has_groups = await knex('users_has_groups')
+                .insert({
+                    id_group,
+                    id_user
+                })
+
             return response
                 .status(HTTP_CREATED)
                 .json({
-                    id,
+                    id_group,
                     image: request.file.filename,
                     name,
                     date,

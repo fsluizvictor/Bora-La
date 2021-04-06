@@ -85,7 +85,7 @@ describe('testing create user', () => {
                 email: "fs.luizvictor@gmail.com",
                 password: "12345678",
                 description: "Eu sou aluno do curso de ...",
-                whatsapp: "031 9999999",
+                whatsapp: "031 99999999999",
             })
 
         expect(user.status).toEqual(HTTP_NO_CONTENT)
