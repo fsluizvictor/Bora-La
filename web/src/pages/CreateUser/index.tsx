@@ -9,7 +9,7 @@ import api from '../../services/api'
 
 import Dropzone from '../../components/Dropzone'
 
-import logo from '../../assets/logo/logo.svg'
+import logo from '../../assets/logo/logo_50.png'
 
 import './styles.css'
 
@@ -30,6 +30,7 @@ const CreateUser = () => {
         whatsapp: '',
         registration: '',
         birth: '',
+        course: '',
         password: '',
         description: ''
     })
@@ -107,6 +108,7 @@ const CreateUser = () => {
             whatsapp,
             registration,
             birth,
+            course,
             password,
             description
         } = formData
@@ -124,6 +126,7 @@ const CreateUser = () => {
         data.append('whatsapp', whatsapp)
         data.append('registration', registration)
         data.append('birth', birth)
+        data.append('course', course)
         data.append('password', password)
         data.append('description', description)
         data.append('uf', uf)
@@ -207,7 +210,7 @@ const CreateUser = () => {
                         <div className="field">
                             <label htmlFor="whatsapp">Data de Nascimento</label>
                             <input
-                                type="text"
+                                type="date"
                                 name="birth"
                                 id="birth"
                                 onChange={handleInputChange}
@@ -216,16 +219,20 @@ const CreateUser = () => {
                     </div>
                     <div className="field">
                         <label htmlFor="name">Curso</label>
-                        <select name="uf" id="uf">
-                            <option value="">Selecione um Curso</option>
-                        </select>
+                        <input
+                            type="text"
+                            name="course"
+                            id="course"
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className="field">
                         <label htmlFor="name">Senha</label>
                         <input
-                            type="text"
+                            type="password"
                             name="password"
                             id="password"
+                            placeholder="Insira sua senha :)"
                             onChange={handleInputChange}
                         />
                     </div>
@@ -291,6 +298,7 @@ const CreateUser = () => {
                         <textarea
                             name="description"
                             id="description"
+                            placeholder="Insira aqui alguma informação sobre vc :)"
                             onChange={handleTextAreaChange}
                         />
                     </div>

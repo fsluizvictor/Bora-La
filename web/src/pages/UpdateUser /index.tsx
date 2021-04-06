@@ -3,17 +3,17 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import { TileLayer, Marker, Map } from 'react-leaflet'
 import { LeafletMouseEvent } from 'leaflet'
-import { IBGEUFResponse, IBGECITYResponse, TUser } from '../../utils/types/types'
+import { IBGEUFResponse, IBGECITYResponse, TUser, TInfo } from '../../utils/types/types'
 import apiIbge from '../../services/apiIbge'
 import api from '../../services/api'
 
 import Dropzone from '../../components/Dropzone'
 
-import logo from '../../assets/logo/logo.svg'
+import logo from '../../assets/logo/logo_50.png'
 
 import './styles.css'
 
-const UpdateUser: React.FC = () => {
+const UpdateUser = () => {
 
     const {
         id_user
@@ -36,6 +36,7 @@ const UpdateUser: React.FC = () => {
         whatsapp: '',
         registration: '',
         birth: '',
+        course: '',
         password: '',
         description: ''
     })
@@ -122,6 +123,7 @@ const UpdateUser: React.FC = () => {
             whatsapp,
             registration,
             birth,
+            course,
             password,
             description
         } = formData
@@ -130,31 +132,26 @@ const UpdateUser: React.FC = () => {
         const city = selectedCity
         const [latitude, longitude] = selectedPosition
 
-        const data = new FormData()
-
-
-
-        data.append('name', name)
-        data.append('email', email)
-        data.append('whatsapp', whatsapp)
-        data.append('registration', registration)
-        data.append('birth', birth)
-        data.append('password', password)
-        data.append('description', description)
-        data.append('uf', uf)
-        data.append('city', city)
-        data.append('latitude', String(latitude))
-        data.append('longitude', String(longitude))
-
-        if (selectedFile) {
-            data.append('image', selectedFile)
+        const data = {
+            name,
+            email,
+            whatsapp,
+            registration,
+            birth,
+            course,
+            password,
+            description,
+            uf,
+            city,
+            latitude,
+            longitude
         }
 
         console.log(data)
 
         await api.put(`users/${dataUser?.id}`, data)
 
-        history.push('/')
+        history.push(`/user_page/${dataUser?.id}`)
 
         //alert('Estudante cadastrado com sucesso!')
 
@@ -165,14 +162,13 @@ const UpdateUser: React.FC = () => {
             <header>
                 <img src={logo} alt="Bora Lá" />
 
-                <Link to="/user_page">
+                <Link to={`/user_page/${dataUser?.id}`}>
                     <FiArrowLeft />
                 Voltar para a Página
                 </Link>
             </header>
             <form onSubmit={handleSubmit}>
-                <h1>Bora se cadastrar :)</h1>
-                <Dropzone onFileUploaded={setSelectedFile} />
+                <h1>Bora alterar o perfil :)</h1>
 
                 <fieldset>
                     <legend>
@@ -184,7 +180,7 @@ const UpdateUser: React.FC = () => {
                             type="text"
                             name="name"
                             id="name"
-                            value={dataUser?.name}
+                            defaultValue={dataUser?.name}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -196,7 +192,7 @@ const UpdateUser: React.FC = () => {
                                 type="email"
                                 name="email"
                                 id="email"
-                                value={dataUser?.email}
+                                defaultValue={dataUser?.email}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -206,7 +202,7 @@ const UpdateUser: React.FC = () => {
                                 type="text"
                                 name="whatsapp"
                                 id="whatsapp"
-                                value={dataUser?.whatsapp}
+                                defaultValue={dataUser?.whatsapp}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -218,34 +214,38 @@ const UpdateUser: React.FC = () => {
                                 type="text"
                                 name="registration"
                                 id="registration"
-                                value={dataUser?.registration}
+                                defaultValue={dataUser?.registration}
                                 onChange={handleInputChange}
                             />
                         </div>
                         <div className="field">
                             <label htmlFor="whatsapp">Data de Nascimento</label>
                             <input
-                                type="text"
+                                type="date"
                                 name="birth"
                                 id="birth"
-                                value={dataUser?.whatsapp}
+                                defaultValue={dataUser?.whatsapp}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="field">
                         <label htmlFor="name">Curso</label>
-                        <select name="uf" id="uf">
-                            <option value="">Selecione um Curso</option>
-                        </select>
+                        <input
+                            type="text"
+                            name="course"
+                            id="course"
+                            defaultValue={dataUser?.course}
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className="field">
                         <label htmlFor="name">Senha</label>
                         <input
-                            type="text"
+                            type="password"
                             name="password"
                             id="password"
-                            value={dataUser?.password}
+                            defaultValue={dataUser?.password}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -311,7 +311,7 @@ const UpdateUser: React.FC = () => {
                         <textarea
                             name="description"
                             id="description"
-                            value={dataUser?.description}
+                            defaultValue={dataUser?.description}
                             onChange={handleTextAreaChange}
                         />
                     </div>

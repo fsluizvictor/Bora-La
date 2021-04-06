@@ -1,15 +1,21 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
+import { useParams } from 'react-router-dom'
 import api from '../../services/api'
 
 import Dropzone from '../../components/Dropzone'
 
-import logo from '../../assets/logo/logo.svg'
+import logo from '../../assets/logo/logo_50.png'
 
 import './styles.css'
+import { TInfo } from '../../utils/types/types'
 
 const CreateGroup = () => {
+
+    const {
+        id_user
+    }: any = useParams()
 
     const [selectedFile, setSelectedFile] = useState<File>()
 
@@ -65,6 +71,8 @@ const CreateGroup = () => {
         data.append('occupation_area', occupation_area)
         data.append('date', String(date))
         data.append('rules', rules)
+        data.append('id_user', String(id_user))
+
 
         if (selectedFile) {
             data.append('image', selectedFile)
@@ -74,7 +82,7 @@ const CreateGroup = () => {
 
         await api.post('groups', data)
 
-        history.push('/')
+        history.push(`/user_page/${id_user}`)
 
         //alert('Estudante cadastrado com sucesso!')
 
@@ -85,7 +93,7 @@ const CreateGroup = () => {
             <header>
                 <img src={logo} alt="Bora Lá" />
 
-                <Link to="/user_page">
+                <Link to={`/user_page/${id_user}`}>
                     <FiArrowLeft />
                 Voltar para a Página
                 </Link>
@@ -111,9 +119,12 @@ const CreateGroup = () => {
 
                     <div className="field">
                         <label htmlFor="name">Área de Concentração</label>
-                        <select name="occupation_area" id="occupation_area">
-                            <option value="">Selecione uma área</option>
-                        </select>
+                        <input
+                            type="text"
+                            name="occupation_area"
+                            id="occupation_area"
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className="field">
                         <legend>
@@ -123,6 +134,7 @@ const CreateGroup = () => {
                         <textarea
                             name="rules"
                             id="rules"
+                            placeholder="Coloque as atitudes esperadas por aqui ;)"
                             onChange={handleTextAreaChangeRules}
                         />
                     </div>
@@ -137,6 +149,7 @@ const CreateGroup = () => {
                         <textarea
                             name="description"
                             id="description"
+                            placeholder="Coloque o que mais tem haver ;)"
                             onChange={handleTextAreaChangeDescription}
                         />
                     </div>

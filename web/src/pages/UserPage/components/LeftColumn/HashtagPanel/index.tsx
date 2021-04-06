@@ -31,13 +31,13 @@ const HashtagPanel: React.FC<TInfo> = ({ user_id }) => {
       </Panel>
       <Panel>
         <span className="tag">
-          <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to='/updateUser_page/1'>
+          <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to={`/updateUser_page/${user_id}`}>
             <EditIcon />
             Editar Perfil
           </Link>
         </span>
         <span className="tag">
-          <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to='/CreateGroup'>
+          <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to={`/CreateGroup/${user_id}`}>
             <GroupIcon />
             Criar Grupo
           </Link>

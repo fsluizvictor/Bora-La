@@ -16,7 +16,7 @@ const Routes = () => {
             <Switch>
                 <Route component={Home} path="/" exact />
                 <Route component={CreateUser} path="/CreateUser" />
-                <Route component={CreateGroup} path="/CreateGroup" />
+                <Route component={CreateGroup} path="/CreateGroup/:id_user" />
                 <Route component={Layout} path="/groups_page/:group_id/:user_id" />
                 <Route component={LayoutUserPage} path="/user_page/:user_id" />
                 <Route component={Login} path="/login" />
