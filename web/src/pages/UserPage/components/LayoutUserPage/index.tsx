@@ -16,12 +16,6 @@ const LayoutUserPage: React.FC = () => {
         user_id
     }: any = useParams()
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
-    }, [])
-
     return (
         <Container>
             <MobileHeader />
@@ -32,7 +26,7 @@ const LayoutUserPage: React.FC = () => {
             <main>
                 <LeftColumn user_id={user_id} />
                 <MiddleColumn user_id={user_id} />
-                <RightColumn />
+                <RightColumn user_id={user_id} />
             </main>
         </Container>
     )

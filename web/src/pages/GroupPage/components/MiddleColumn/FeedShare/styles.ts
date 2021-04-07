@@ -25,7 +25,7 @@ export const Container = styled.div`
     > textarea {
       width: 100%;
       border-style: none;
-      border-color: transparent;
+      border-color: #f6f6f6;
       overflow: auto;
       overflow-y: hidden;
       resize: none;

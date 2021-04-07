@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import api from '../../../../../services/api';
-import { TInfo, TPost } from '../../../../../utils/types/types';
+import { TInfo, TPost, TUser } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
@@ -20,50 +20,64 @@ import {
 
 const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
 
-  const [contentFeedPost, setContentFeedPost] = useState<TPost[]>([])
-  const [formData, setFormData] = useState({
-    contents: ''
-  })
+  const [contentFeedPost, setContentFeedPost] = useState([])
+  const [formData, setFormData] = useState<any>([])
+  const [dataUser, setDataUser] = useState<TUser>()
 
   useEffect(() => {
-    api.get<TPost[]>(`groups_page/posts/${group_id}`).then(response => {
+    api.get(`groups_page/posts/${group_id}`).then(response => {
       setContentFeedPost(response.data)
+      setFormData(response.data.map(() => ({ contents: '' })))
     })
   }, [])
+
+  useEffect(() => {
+    api.get(`/users/${user_id}`).then(response => {
+      setDataUser(response.data)
+    })
+  }, [])
+
+
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     const {
+      id,
       contents
-    } = formData
+    } = formData as TPost
 
-    setFormData({
-      contents: ""
-    })
+    console.log(formData)
+    console.log(contentFeedPost)
 
-    const data = {
-      contents
-    }
-    await api.post(`groups_page/coments/${group_id}/${user_id}`, data)
-    
+    // setFormData({
+    //   contents: ""
+    // })
+
+    // const data = {
+    //   contents
+    // }
+    console.log(contents)
+    await api.post(`groups_page/coments/${id}/${user_id}`, contents)
+
   }
-  
+
   //console.log("[TESTE]", group_id)
-  function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
+  const handleTextAreaChange = (postIndex: number) => (event: ChangeEvent<HTMLTextAreaElement>) => {
 
     const { name, value } = event.target
 
-    setFormData({
-      ...formData,
-      [name]: value
-    })
+    setFormData(
+      formData.map((postData: TPost, i: number) => i === postIndex
+        ? { ...postData, [name]: value }
+        : postData
+      ))
 
   }
 
   return (
     <form onSubmit={handleSubmit} >
-      {contentFeedPost.map((post) => (
+      {contentFeedPost.map((post: TPost, i: number) => (
 
         <>
           <Panel>
@@ -72,7 +86,7 @@ const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
                 <Avatar src={post.user.image_url} alt="Member" />
                 <Column>
                   <h3>{post.user.name}</h3>
-                  <h4>Engenharia de Computação</h4>
+                  <h4>{post.user.course}</h4>
                   <time>{post.date}</time>
                 </Column>
               </Row>
@@ -104,7 +118,7 @@ const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
                 <span className="circle blue" />
                 <span className="circle green" />
                 <span className="circle red" />
-                <span className="number">49</span>
+                <span className="number"></span>
               </Row>
 
               <Row>
@@ -131,12 +145,13 @@ const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
               </Row>
 
               <Row>
-                <Avatar src={post.user.image_url} alt="Member" />
+                <Avatar src={dataUser?.image_url} alt="Member" />
                 <textarea
                   id={String(post.id)}
                   name="contents"
                   placeholder="Insira um comentário..."
-                  onChange={handleTextAreaChange}
+                  //value={formData[i].contents}
+                  onChange={handleTextAreaChange(i)}
                 />
                 <button>
                   <SendIcon />

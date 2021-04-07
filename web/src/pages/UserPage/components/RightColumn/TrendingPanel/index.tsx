@@ -1,20 +1,40 @@
+import { NONAME } from 'dns';
 import React, { useEffect, useState } from 'react';
+import { FormEvent } from 'react';
 import api from '../../../../../services/api';
-import { TGroup, TInfo } from '../../../../../utils/types/types';
+import { TGroup, TInfo, TUser } from '../../../../../utils/types/types';
 
 import Panel from '../../Panel';
 
 import { Container, ProfileCircle } from './styles';
 
-const TrendingPanel: React.FC = () => {
+const TrendingPanel: React.FC<TInfo> = ({ user_id }) => {
 
-  const [allGroups, setAllGroups] = useState<TGroup[]>([])
+  const [allGroups, setAllGroups] = useState([])
+  const [idGroup, setIdGroup] = useState<number>()
 
   useEffect(() => {
-    api.get<TGroup[]>('/groups').then((response) => {
+    api.get('/groups').then((response) => {
       setAllGroups(response.data)
     })
   }, [])
+
+  function handleGroupToAddUser(id: number) {
+    //console.log(id)
+    setIdGroup(id)
+  }
+
+  async function handleSubmit(event: FormEvent) {
+
+    //event.preventDefault()
+
+    const id = idGroup
+
+    console.log(id)
+
+    await api.post(`/groups_page/add/${id}/${user_id}`)
+
+  }
 
   return (
     <Container>
@@ -22,14 +42,21 @@ const TrendingPanel: React.FC = () => {
         <span className="title">Grupos do Sistema</span>
         <ul>
           {allGroups.map((group: TGroup) => (
-            <li>
-              <ProfileCircle src={group.image_url} />
-              <span className="bullet" />
-              <span className="news">
-                <span className="head">{group.name}</span>
-                <span className="subtext">Ciências Exatas</span>
-              </span>
-            </li>
+            <form onSubmit={handleSubmit} >
+              <button type="submit" style={{ border: 'none', background: 'none' }} >
+                <li
+                  key={group.id}
+                  onClick={() => handleGroupToAddUser(group.id)}
+                >
+                  <ProfileCircle src={group.image_url} />
+                  <span className="bullet" />
+                  <span className="news">
+                    <span className="head">{group.name}</span>
+                    <span className="subtext">{group.occupation_area}</span>
+                  </span>
+                </li>
+              </button>
+            </form>
           ))}
         </ul>
       </Panel>

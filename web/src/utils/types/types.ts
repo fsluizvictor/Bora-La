@@ -29,6 +29,7 @@ export type TGroup = {
     occupation_area: string
     rules: string
     image_url: string
+    id_group: number
 }
 
 export type TInfo = {

@@ -14,7 +14,7 @@ export const Container = styled.div`
     }
     ul {
       list-style: none;
-      margin-top: 8px;
+      margin-top: 8px;      
 
       li {
         display: flex;
@@ -47,8 +47,27 @@ export const Container = styled.div`
           margin-top: 10px;
         }
       }
+
+      button {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--color-gray);
+      font-size: 14px;
+      font-weight: 600;
+
+      display: flex;
+      align-items: center;
+      padding: 14px 8px;
+
+      cursor: pointer;
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.05);
+      }
     }
   }
+}
 `;
 
 export const Info = styled.div`

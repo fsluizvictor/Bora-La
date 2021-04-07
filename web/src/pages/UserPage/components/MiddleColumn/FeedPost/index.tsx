@@ -27,10 +27,10 @@ const FeedPost: React.FC<TInfo> = ({ user_id }) => {
   return (
 
     <>
-      {contentGroup.map((group: TGroup) => (
+      {contentGroup.map((group) => (
         <Container>
           <Panel>
-            <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to={`/groups_page/${group.id - 1}/1`} >
+            <Link style={{ textDecoration: 'none', color: 'var(--color-black)' }} to={`/groups_page/${group.id_group}/${user_id}`} >
               <Row className="heading">
                 <Avatar src={group.image_url} alt="Member" />
                 <Column>

@@ -48,10 +48,10 @@ const FeedShare: React.FC<TInfo> = ({ group_id, user_id }) => {
       data.append('image', selectedVideo)
     }
 
-    await api.post(`groups_page/${group_id}/1`, data)
+    await api.post(`groups_page/${group_id}/${user_id}`, data)
 
     window.location.reload()
-    //history.push('/groups_page')
+    //history.push(`/groups_page/${group_id}/${user_id}`)
   }
 
   function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {

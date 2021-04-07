@@ -6,11 +6,11 @@ import TrendingPanel from './TrendingPanel';
 import { Container } from './styles';
 import { LoadingProps, TInfo } from '../../../../utils/types/types';
 
-const RightColumn: React.FC = () => {
+const RightColumn: React.FC<TInfo> = ({user_id}) => {
   return (
     <Container className="right-column">
       <>
-        <TrendingPanel />
+        <TrendingPanel user_id={user_id} />
       </>
     </Container>
   );
