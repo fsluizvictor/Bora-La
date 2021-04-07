@@ -1,7 +1,7 @@
 export type TUser = {
     id: number
     name: string
-    image_url: string
+    image: string
     registration: string
     city: string
     uf: string

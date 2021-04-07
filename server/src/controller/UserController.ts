@@ -79,17 +79,31 @@ class UserController {
                 .join('users_has_groups', 'users_has_groups.id_group', 'groups.id')
                 .where('users_has_groups.id_user', '=', id_user)
 
-            const groups = myGroups.map(group => {
-                return {
-                    ...group,
-                    image_url: `${IP_UPLOAD_PATH}${group.image}`
-                }
-            })
+            const groups = await knex('groups')
+                .select('*')
+
+            myGroups.sort
+            //console.log("MEUS ", myGroups)
+            groups.sort
+            //console.log("SISTEMA", groups)
+
+            myGroups.forEach(element => {
+                groups.splice(groups.indexOf(element), 1)
+            });
+
+            //console.log("ALTERADO :", groups)
+
+             const groups_not = groups.map(group => {
+                 return {
+                     ...group,
+                     image_url: `${IP_UPLOAD_PATH}${group.image}`
+                 }
+             })
 
             return response
                 .status(HTTP_SUCCESS)
                 .json(
-                    groups
+                    groups_not
                 )
 
         } catch (error) {

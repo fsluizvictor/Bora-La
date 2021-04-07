@@ -25,7 +25,7 @@ class GroupPageController {
                 return {
                     id: user.id,
                     name: user.name,
-                    image_url: user.image_url,
+                    image_url: `${IP_UPLOAD_PATH}${user.image}`,
                     registration: user.registration,
                     city: user.city,
                     uf: user.uf,
