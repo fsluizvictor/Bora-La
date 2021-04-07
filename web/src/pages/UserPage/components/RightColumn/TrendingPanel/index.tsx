@@ -14,7 +14,7 @@ const TrendingPanel: React.FC<TInfo> = ({ user_id }) => {
   const [idGroup, setIdGroup] = useState<number>()
 
   useEffect(() => {
-    api.get('/groups').then((response) => {
+    api.get(`/users/groups/not/${user_id}`).then((response) => {
       setAllGroups(response.data)
     })
   }, [])
