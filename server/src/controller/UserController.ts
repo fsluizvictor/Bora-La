@@ -66,6 +66,40 @@ class UserController {
         }
     }
 
+    async indexMyNotGroups(request: Request, response: Response) {
+        try {
+
+            const {
+                id_user
+            } = request.params
+
+            const myGroups = await knex
+                .select('*')
+                .from('groups')
+                .join('users_has_groups', 'users_has_groups.id_group', 'groups.id')
+                .where('users_has_groups.id_user', '=', id_user)
+
+            const groups = myGroups.map(group => {
+                return {
+                    ...group,
+                    image_url: `${IP_UPLOAD_PATH}${group.image}`
+                }
+            })
+
+            return response
+                .status(HTTP_SUCCESS)
+                .json(
+                    groups
+                )
+
+        } catch (error) {
+
+            return response.status(HTTP_SERVER_ERROR).json(error)
+
+        }
+    }
+
+
     async show(request: Request, response: Response) {
         try {
 
