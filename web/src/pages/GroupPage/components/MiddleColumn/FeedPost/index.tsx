@@ -21,13 +21,16 @@ import {
 const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
 
   const [contentFeedPost, setContentFeedPost] = useState([])
-  const [formData, setFormData] = useState<any>([])
+  const [formData, setFormData] = useState({
+    contents: ''
+  })
   const [dataUser, setDataUser] = useState<TUser>()
+  const [idPost, setIdPost] = useState<number>()
 
   useEffect(() => {
     api.get(`groups_page/posts/${group_id}`).then(response => {
       setContentFeedPost(response.data)
-      setFormData(response.data.map(() => ({ contents: '' })))
+      //setFormData(response.data.map(() => ({ contents: '' })))
     })
   }, [])
 
@@ -37,42 +40,30 @@ const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
     })
   }, [])
 
+  function handleTextAreaComent(event: ChangeEvent<HTMLTextAreaElement>) {
+    const { name, value } = event.target
 
-
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault()
-
-    const {
-      id,
-      contents
-    } = formData as TPost
-
-    console.log(formData)
-    console.log(contentFeedPost)
-
-    // setFormData({
-    //   contents: ""
-    // })
-
-    // const data = {
-    //   contents
-    // }
-    console.log(contents)
-    await api.post(`groups_page/coments/${id}/${user_id}`, contents)
+    setFormData({ ...formData, [name]: value })
 
   }
 
-  //console.log("[TESTE]", group_id)
-  const handleTextAreaChange = (postIndex: number) => (event: ChangeEvent<HTMLTextAreaElement>) => {
 
-    const { name, value } = event.target
+  async function handleSubmit(event: FormEvent) {
+    //event.preventDefault()
 
-    setFormData(
-      formData.map((postData: TPost, i: number) => i === postIndex
-        ? { ...postData, [name]: value }
-        : postData
-      ))
+    const {
+      contents
+    } = formData
 
+    console.log(idPost)
+    console.log(contents)
+
+    await api.post(`groups_page/coments/${idPost}/${user_id}`, formData)
+
+  }
+
+  function handleTextAreaChange(id: number) {
+    setIdPost(id)
   }
 
   return (
@@ -150,10 +141,13 @@ const FeedPost: React.FC<TInfo> = ({ group_id, user_id }) => {
                   id={String(post.id)}
                   name="contents"
                   placeholder="Insira um comentário..."
-                  //value={formData[i].contents}
-                  onChange={handleTextAreaChange(i)}
+                  onChange={handleTextAreaComent}
+                  onClick={() => { handleTextAreaChange(post.id) }}
+                //value={formData[i].contents}
                 />
-                <button>
+                <button
+                  type="submit"
+                >
                   <SendIcon />
                 </button>
               </Row>

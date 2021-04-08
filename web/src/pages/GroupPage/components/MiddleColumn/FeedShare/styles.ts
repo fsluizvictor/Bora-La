@@ -23,6 +23,7 @@ export const Container = styled.div`
     }
 
     > textarea {
+      background-color:#f6f6f6;
       width: 100%;
       border-style: none;
       border-color: #f6f6f6;

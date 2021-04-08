@@ -27,7 +27,7 @@ const TrendingPanel: React.FC<TInfo> = ({ group_id, user_id }) => {
               <span className="bullet" />
               <span className="news">
                 <span className="head">{user.name}</span>
-                <span className="subtext">Engenharia de Computação</span>
+                <span className="subtext">{user.course}</span>
               </span>
             </li>
           ))}
