@@ -79,7 +79,7 @@ class UserController {
                 .join('users_has_groups', 'users_has_groups.id_group', 'groups.id')
                 .where('users_has_groups.id_user', '=', id_user)
 
-            console.log("WHERE NOT : ", myGroups)
+            //console.log("WHERE NOT : ", myGroups)
 
             const groups = await knex('groups')
                 .select('*')

@@ -20,7 +20,7 @@ class GroupPageController {
                 .from('users')
                 .join('users_has_groups', 'users_has_groups.id_user', 'users.id')
                 .where('users_has_groups.id_group', '=', id_group)
-            console.log(users_group)
+            //console.log(users_group)
             const users = users_group.map((user: TUser) => {
                 return {
                     id: user.id,
