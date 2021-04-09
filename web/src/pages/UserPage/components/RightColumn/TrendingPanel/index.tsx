@@ -38,7 +38,7 @@ const TrendingPanel: React.FC<TInfo> = ({ user_id }) => {
   return (
     <Container>
       <Panel>
-        <span className="title">Grupos do Sistema</span>
+        <span className="title">Grupos que não participo :| </span>
         <ul>
           {allGroups.map((group: TGroup) => (
             <form onSubmit={handleSubmit} >

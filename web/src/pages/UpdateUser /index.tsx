@@ -19,23 +19,12 @@ const UpdateUser = () => {
         id_user
     }: any = useParams()
 
-    const [ufs, setUfs] = useState<string[]>([])
-    const [cities, setCities] = useState<string[]>([])
-
-    const [selectedUf, setSelectedUF] = useState('0')
-    const [selectedCity, setSelectedCity] = useState('0')
-    const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0])
-
-    const [selectedFile, setSelectedFile] = useState<File>()
-
     const [dataUser, setDataUser] = useState<TUser>()
 
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         whatsapp: '',
-        registration: '',
-        birth: '',
         course: '',
         password: '',
         description: ''
@@ -54,51 +43,22 @@ const UpdateUser = () => {
         })
     }, [])
 
-    useEffect(() => {
-        apiIbge
-            .get<IBGEUFResponse[]>('estados')
-            .then(response => {
-                const ufInitials = response.data.map(uf => uf.sigla)
-                setUfs(ufInitials)
-            })
-    }, [])
-
-    useEffect(() => {
-        apiIbge
-            .get<IBGECITYResponse[]>(`estados/${selectedUf}/municipios`)
-            .then(response => {
-                const cityNames = response.data.map(city => city.nome)
-                setCities(cityNames)
-            })
-    }, [selectedUf])
-
-
-    console.log(id_user)
 
     useEffect(() => {
         api.get(`users/${id_user}`).then(response => {
             setDataUser(response.data)
+            setFormData({
+                name: dataUser?.name!,
+                email: dataUser?.email!,
+                whatsapp: dataUser?.whatsapp!,
+                course: dataUser?.course!,
+                password: dataUser?.password!,
+                description: dataUser?.description!
+            })
         })
     }, [])
 
     console.log(dataUser)
-
-    function handleSelectUF(event: ChangeEvent<HTMLSelectElement>) {
-        const uf = event.target.value
-        setSelectedUF(uf)
-    }
-
-    function handleSelectCity(event: ChangeEvent<HTMLSelectElement>) {
-        const city = event.target.value
-        setSelectedCity(city)
-    }
-
-    function handleMapOnClick(event: LeafletMouseEvent) {
-        setSelectedPosition([
-            event.latlng.lat,
-            event.latlng.lng
-        ])
-    }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target
@@ -121,30 +81,18 @@ const UpdateUser = () => {
             name,
             email,
             whatsapp,
-            registration,
-            birth,
             course,
             password,
             description
         } = formData
 
-        const uf = selectedUf
-        const city = selectedCity
-        const [latitude, longitude] = selectedPosition
-
         const data = {
             name,
             email,
             whatsapp,
-            registration,
-            birth,
             course,
             password,
             description,
-            uf,
-            city,
-            latitude,
-            longitude
         }
 
         console.log(data)
@@ -207,28 +155,7 @@ const UpdateUser = () => {
                             />
                         </div>
                     </div>
-                    <div className="field-group">
-                        <div className="field">
-                            <label htmlFor="name">Matrícula</label>
-                            <input
-                                type="text"
-                                name="registration"
-                                id="registration"
-                                defaultValue={dataUser?.registration}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="whatsapp">Data de Nascimento</label>
-                            <input
-                                type="date"
-                                name="birth"
-                                id="birth"
-                                defaultValue={dataUser?.whatsapp}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                    </div>
+
                     <div className="field">
                         <label htmlFor="name">Curso</label>
                         <input
@@ -248,57 +175,6 @@ const UpdateUser = () => {
                             defaultValue={dataUser?.password}
                             onChange={handleInputChange}
                         />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>
-                        <h2>Endereço</h2>
-                        <span>Selecione o endereço no mapa</span>
-                    </legend>
-
-                    <Map
-                        center={InicialPosition}
-                        zoom={15}
-                        onclick={handleMapOnClick}
-                    >
-                        <TileLayer
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <Marker position={selectedPosition} />
-                    </Map>
-
-
-                    <div className="field-group">
-                        <div className="field">
-                            <label htmlFor="">Estado (UF)</label>
-                            <select
-                                name="uf"
-                                id="uf"
-                                value={selectedUf}
-                                onChange={handleSelectUF}
-                            >
-                                <option value="0">Selecione uma UF</option>
-                                {ufs.map(uf => (
-                                    <option key={uf} value={uf}>{uf}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="">Cidade</label>
-                            <select
-                                name="city"
-                                id="city"
-                                value={selectedCity}
-                                onChange={handleSelectCity}
-                            >
-                                <option value="0">Selecione uma cidade</option>
-                                {cities.map(city => (
-                                    <option key={city} value={city}>{city}</option>
-                                ))}
-                            </select>
-                        </div>
                     </div>
                 </fieldset>
 

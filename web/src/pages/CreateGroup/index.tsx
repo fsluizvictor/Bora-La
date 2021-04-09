@@ -64,7 +64,8 @@ const CreateGroup = () => {
         const data = new FormData()
 
         const now = new Date()
-        const date = now.getDate()
+        let month = Number(now.getMonth()) + 1
+        const date = now.getDate() + '/' + month + '/' + now.getFullYear()
 
         data.append('name', name)
         data.append('description', description)

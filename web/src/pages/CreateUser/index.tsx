@@ -138,7 +138,7 @@ const CreateUser = () => {
             data.append('image', selectedFile)
         }
 
-        console.log(data)
+        //console.log(data)
 
         await api.post('users', data)
 
