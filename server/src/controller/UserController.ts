@@ -79,16 +79,27 @@ class UserController {
                 .join('users_has_groups', 'users_has_groups.id_group', 'groups.id')
                 .where('users_has_groups.id_user', '=', id_user)
 
-            //console.log("WHERE NOT : ", myGroups)
+            console.log("MY GROUPS:", myGroups)
+
+            const my_objects_groups = myGroups.map((element) => {
+                return {
+                    id: element.id_group,
+                    name: element.name,
+                    date: element.date,
+                    description: element.description,
+                    occupation_area: element.occupation_area,
+                    rules: element.rules,
+                    image: element.rules
+                } as any
+            })
+
+            console.log("MY", my_objects_groups)
 
             const groups = await knex('groups')
                 .select('*')
 
-            myGroups.sort
-            groups.sort
-
-            myGroups.forEach(element => {
-                groups.splice(groups.indexOf(element), 1)
+            my_objects_groups.forEach((element) => {
+                groups.splice(element, 1)
             });
 
             const groups_not = groups.map(group => {
