@@ -14,9 +14,13 @@ class AuthController {
                 pass
             } = request.params
 
+            //console.log(reg, pass)
+
             const user = await knex('users')
                 .where('registration', reg)
                 .first()
+
+            //console.log(user)
 
             if (!user)
                 return response.sendStatus(HTTP_NO_AUTHENTICATED)

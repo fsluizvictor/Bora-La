@@ -88,7 +88,7 @@ class UserController {
             groups.sort
 
             myGroups.forEach(element => {
-                groups.splice(element, 1)
+                groups.splice(groups.indexOf(element), 1)
             });
 
             const groups_not = groups.map(group => {
@@ -212,14 +212,9 @@ class UserController {
 
             const {
                 name,
-                registration,
-                city,
-                uf,
-                latitude,
-                longitude,
-                birth,
                 course,
                 email,
+                whatsapp,
                 description,
                 password
             } = request.body
@@ -227,14 +222,8 @@ class UserController {
             await knex('users')
                 .update({
                     name,
-                    registration,
-                    city,
-                    uf,
-                    latitude,
-                    longitude,
-                    birth,
-                    course,
                     email,
+                    whatsapp,
                     description,
                     password
                 })
@@ -245,13 +234,7 @@ class UserController {
                 .json({
                     id,
                     name,
-                    registration,
-                    city,
-                    uf,
-                    latitude,
-                    longitude,
-                    birth,
-                    course,
+                    whatsapp,
                     email,
                     description
                 })

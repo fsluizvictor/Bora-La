@@ -5,7 +5,7 @@ export async function up(knex: Knex) {
         table.increments('id').primary()
         table.string('name').notNullable()
         table.string('image')
-        table.string('registration').notNullable()
+        table.string('registration').notNullable().unique()
         table.string('city').notNullable()
         table.string('uf', 2).notNullable()
         table.decimal('latitude').notNullable()
